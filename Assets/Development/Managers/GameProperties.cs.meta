@@ -1,10 +1,17 @@
 fileFormatVersion: 2
 guid: 27dbc1d7a0597443ba884b3a74af1158
-timeCreated: 1494085893
-licenseType: Pro
+timeCreated: 1525545994
+licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - PlayerPrefab: {fileID: 1049031074774824, guid: 3a84e1e8a053a6c4891ddd2e8d828c93,
+      type: 2}
+  - CameraPrefab: {fileID: 1797545108939864, guid: 242012838150536429228b1bef133ee4,
+      type: 2}
+  - LevelPrefab: {instanceID: 0}
+  - HipsterPrefab: {fileID: 1765459899123038, guid: 58ae96c91cdd90d4ab9da30cda72a8eb,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

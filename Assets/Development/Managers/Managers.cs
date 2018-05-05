@@ -33,8 +33,13 @@ public class Managers : MonoBehaviour {
 		return m_npcmanager;
 	}
 
-	//Public Variables
-	public void Awake()	{
+    public StageManager GetStageManager()
+    {
+        return m_stagemanager;
+    }
+
+    //Public Variables
+    public void Awake()	{
 		m_instance = this;
 	}
 

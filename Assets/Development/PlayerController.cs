@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour {
 
     public float speed = 2f;
     public float ySpeedMult = 0.5f; // Multiplier for speed when moving up or down
-    public float startHealth = 100f;
-    private float currentHealth;
+    public int startHealth = 100;
+    private int currentHealth;
     private Camera camera;
     private PlayerStates state = PlayerStates.idle;
 
@@ -28,20 +28,26 @@ public class PlayerController : MonoBehaviour {
     }
 
     void die() {
+        Debug.Log("The player has been killed because they are bad at video games");
         state = PlayerStates.dying;
         Debug.Log("I am slain");
     }
 
     public void damage(int amount) {
         this.currentHealth -= amount;
+        Debug.Log("Damaging player by " + amount + " units");
         if (this.currentHealth < 0) {
-            die();
+            this.die();
         }
     }
 
     // Update is called once per frame
     void Update() {
         Vector3 walkVector = Vector3.zero;
+
+        if (Input.GetKeyDown(KeyCode.J)) {
+            this.die();
+        }
 
         if (Input.GetKey(KeyCode.A)) {
             walkVector += Vector3.left;
@@ -59,6 +65,7 @@ public class PlayerController : MonoBehaviour {
         if (walkVector != Vector3.zero) {
             this.walk(walkVector);
         }
+
     }
 
     void walk(Vector3 walkVector) {
@@ -77,7 +84,7 @@ public class PlayerController : MonoBehaviour {
             transform.rotation = Quaternion.identity;
         }
 
-        if (transform.position.x > camera.transform.position.x) {
+        if(transform.position.x > camera.transform.position.x && !Managers.GetInstance().GetStageManager().ActiveScene()) {
             camera.transform.Translate(step * Vector3.right);
         }
     }
