@@ -7,4 +7,6 @@ public class GameProperties : MonoBehaviour {
 	public GameObject CameraPrefab;
 	public GameObject LevelPrefab;
     public GameObject HipsterPrefab;
+    public GameObject Hipster2Prefab;
+    public GameObject BossPrefab;
 }

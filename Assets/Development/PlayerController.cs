@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("The player has been killed because they are bad at video games");
         animator.SetBool("dying", true);
         state = PlayerStates.dying;
+        Debug.Log("I am slain");
     }
 
     public void damage(int amount) {
