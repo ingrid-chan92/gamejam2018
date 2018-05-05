@@ -10,7 +10,6 @@ public class GameStateManager : MonoBehaviour {
 	private Enums.GameStateNames m_nextGameStateIndex = Enums.GameStateNames.GS_00_NULL;
 	private bool m_initialised = false;
 
-
 	public Enums.GameStateNames CurrentState
 	{
 		get { return m_currentGameStateIndex; }
