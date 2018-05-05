@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour {
             return;
         }
         this.currentHealth -= amount;
+        if (this.currentHealth > this.startHealth) {
+            this.currentHealth = this.startHealth;
+        }
         //Debug.Log("Damaging player by " + amount + " units");
         if (this.currentHealth < 0) {
             this.die();
@@ -53,7 +56,7 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         Vector3 walkVector = Vector3.zero;
-        Debug.Log("Current Health = " + currentHealth);
+        // Debug.Log("Current Health = " + currentHealth);
 
         if (Input.GetKeyDown(KeyCode.J)) {
             this.die();
@@ -74,6 +77,10 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space)) {
             attack();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F)) {
+            throwRaccoon();
         }
 
         if (walkVector != Vector3.zero) {
@@ -97,6 +104,21 @@ public class PlayerController : MonoBehaviour {
             enemy = results[i].GetComponentInParent<HipsterController>();
             enemy.Damage(punchDamage);
         }
+    }
+
+    void throwRaccoon() {
+        GameObject raccoonPrefab = Managers.GetInstance().GetGameProperties().RaccoonPrefab;
+
+        GameObject raccoon = GameObject.Instantiate(raccoonPrefab);
+        raccoon.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
+        Vector3 initialVelocity = new Vector3(-2, 2);
+        Debug.Log(initialVelocity);
+        initialVelocity = transform.rotation * initialVelocity;
+        Debug.Log(initialVelocity);
+
+        RaccoonController cntrl = raccoon.GetComponent<RaccoonController>();
+        cntrl.SetVelocity(initialVelocity);
     }
 
     void walk(Vector3 walkVector) {
