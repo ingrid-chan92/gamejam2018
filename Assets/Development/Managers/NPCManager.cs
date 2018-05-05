@@ -16,10 +16,12 @@ public class NPCManager : MonoBehaviour {
 	void Update () {
 
         HipsterController destroyNPC = null;
+        Vector3 deathSpot = Vector3.zero;
         foreach (HipsterController npc in m_hipster)
         {
             if (npc.isDead())
             {
+                deathSpot = npc.transform.position;
                 destroyNPC = npc;
                 Destroy(npc.gameObject);
                 break;
@@ -27,19 +29,27 @@ public class NPCManager : MonoBehaviour {
         }
         if (destroyNPC)
         {
+            if (Random.Range(0.0f, 10.0f) < 1f)
+            {
+                deathSpot.z = -10f;
+                Managers.GetInstance().GetPowerupManager().SpawnPowerup(deathSpot);
+            }
             m_hipster.Remove(destroyNPC);
         }
     }
 
     public void SpawnHipster(Vector3 position)
     {
-        if (Random.Range(0.0f,1.0f) >= 0.5f)
+        if (Random.Range(0.0f,3.0f) < 1f)
         {
             NPC = Managers.GetInstance().GetGameProperties().HipsterPrefab;
         }
-        else
+        else if(Random.Range(0.0f, 3.0f) < 2f)
         {
             NPC = Managers.GetInstance().GetGameProperties().Hipster2Prefab;
+        } else
+        {
+            NPC = Managers.GetInstance().GetGameProperties().BossPrefab;
         }
         GameObject npc = GameObject.Instantiate(NPC);
         npc.transform.SetPositionAndRotation(position, npc.transform.rotation);

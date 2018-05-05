@@ -11,6 +11,7 @@ public class Managers : MonoBehaviour {
 	private PlayerManager m_playermanager;
 	private NPCManager m_npcmanager;
     private StageManager m_stagemanager;
+    private PowerupManager m_powerupmanager;
 
 	//Accessors
 	public static Managers GetInstance() {
@@ -38,6 +39,11 @@ public class Managers : MonoBehaviour {
         return m_stagemanager;
     }
 
+    public PowerupManager GetPowerupManager()
+    {
+        return m_powerupmanager;
+    }
+
     //Public Variables
     public void Awake()	{
 		m_instance = this;
@@ -50,9 +56,10 @@ public class Managers : MonoBehaviour {
 		m_playermanager = gameObject.AddComponent<PlayerManager> ();
 		m_npcmanager = gameObject.AddComponent<NPCManager> ();
         m_stagemanager = gameObject.AddComponent<StageManager> ();
+        m_powerupmanager = gameObject.AddComponent<PowerupManager>();
 
-		//preferably call init after
-		m_gamestatemanager.Init();
+        //preferably call init after
+        m_gamestatemanager.Init();
 	}
 
 }
