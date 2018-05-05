@@ -9,36 +9,52 @@ public class HipsterController : MonoBehaviour {
     private string state;
     private string direction;
     private GameObject Player;
-   // private Animator animator;
+    private int attacking;
+    private float atkTimer;
+    private Animator animator;
 
 
     // Use this for initialization
     void Start () {
         speed = 1f;
         health = 30;
-        state = "idle";
+        state = "walk";
         direction = "left";
         Player = Managers.GetInstance().GetPlayerManager().GetPlayer();
-//        animator = this.GetComponent<Animator>();
+        animator = this.GetComponentInChildren<Animator>();
+        attacking = 0;
+        atkTimer = 1f;
     }
 
     // Update is called once per frame
     void Update () {
-        if (Managers.GetInstance().GetGameStateManager().CurrentState != Enums.GameStateNames.GS_03_INPLAY)
-        {
+     //   if (Managers.GetInstance().GetGameStateManager().CurrentState != Enums.GameStateNames.GS_03_INPLAY)
+        //{
     //        return;
+       // }
+
+        if (attacking == 1 && atkTimer > 0)
+        {
+            atkTimer -= Time.deltaTime;
+        }
+        if (attacking == 1 && atkTimer <= 0)
+        {
+            atkTimer = 1f;
+            attacking = 0;
         }
 
         Vector3 playPos = Player.transform.position;
 
         state = getState(playPos);
         direction = facePlayer(playPos);
-        Debug.Log("direction " + direction);
-        Debug.Log("state " + state);
 
         if (state == "move")
         {
             walkToPlayer(playPos);
+        }
+        if (state == "attack")
+        {
+            attack();
         }
 
 
@@ -47,17 +63,13 @@ public class HipsterController : MonoBehaviour {
     private string getState(Vector3 playerPos)
     {
 
-        if (Vector3.Distance(playerPos, transform.position) > 10)
+        if (Vector3.Distance(playerPos, transform.position) > .7f)
         {
-         //   animator.SetInteger("State", 1);
-            return "idle";
-        } else if (Vector3.Distance(playerPos, transform.position) > .7f)
-        {
-        //    animator.SetInteger("State", 2);
+            animator.SetInteger("State", 0);
             return "move";
         } else
         {
-         //   animator.SetInteger("State", 3);
+            animator.SetInteger("State", 1);
             return "attack";
         }
     }
@@ -76,7 +88,12 @@ public class HipsterController : MonoBehaviour {
 
     public void attack ()
     {
-
+        if (attacking == 1)
+        {
+            return;
+        }
+        attacking = 1;
+        Debug.Log("take that you knave!");
 
     }
 
