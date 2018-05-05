@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GameProperties : MonoBehaviour {
 
+    public GameObject CameraPrefab;
 	public GameObject PlayerPrefab;
     public GameObject HipsterPrefab;
     public GameObject Hipster2Prefab;
