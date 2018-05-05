@@ -12,6 +12,7 @@ public class HipsterController : MonoBehaviour {
     private int attacking;
     private float atkTimer;
     private Animator animator;
+    public bool dead;
 
 
     // Use this for initialization
@@ -20,18 +21,20 @@ public class HipsterController : MonoBehaviour {
         health = 30;
         state = "walk";
         direction = "left";
+        strength = 8;
         Player = Managers.GetInstance().GetPlayerManager().GetPlayer();
         animator = this.GetComponentInChildren<Animator>();
         attacking = 0;
         atkTimer = 1f;
+        dead = false;
     }
 
     // Update is called once per frame
     void Update () {
-     //   if (Managers.GetInstance().GetGameStateManager().CurrentState != Enums.GameStateNames.GS_03_INPLAY)
-        //{
-    //        return;
-       // }
+        if (dead)
+        {
+            return;
+        }
 
         if (attacking == 1 && atkTimer > 0)
         {
@@ -42,7 +45,6 @@ public class HipsterController : MonoBehaviour {
             atkTimer = 1f;
             attacking = 0;
         }
-
         Vector3 playPos = Player.transform.position;
 
         state = getState(playPos);
@@ -62,6 +64,10 @@ public class HipsterController : MonoBehaviour {
 
     private string getState(Vector3 playerPos)
     {
+        if (dead)
+        {
+            return "dead";
+        }
 
         if (Vector3.Distance(playerPos, transform.position) > .7f)
         {
@@ -81,11 +87,6 @@ public class HipsterController : MonoBehaviour {
 
     }
 
-    public void idle ()
-    {
-
-    }
-
     public void attack ()
     {
         if (attacking == 1)
@@ -93,7 +94,9 @@ public class HipsterController : MonoBehaviour {
             return;
         }
         attacking = 1;
-        Debug.Log("take that you knave!");
+      
+        Player.GetComponent<PlayerController>().damage(8);
+
 
     }
 
@@ -119,5 +122,20 @@ public class HipsterController : MonoBehaviour {
     public void Damage(int damageVal)
     {
         health -= damageVal;
+        if (health <= 0)
+        {
+            die();
+        }
+    }
+
+    private void die()
+    {
+        animator.SetInteger("State", 2);
+        dead = true;        
+    }
+
+    public bool isDead()
+    {
+        return dead;
     }
 }

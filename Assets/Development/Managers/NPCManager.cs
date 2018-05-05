@@ -17,7 +17,20 @@ public class NPCManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-	}
+        HipsterController destroyNPC = null;
+        foreach (HipsterController npc in m_hipster)
+        {
+            if (npc.isDead())
+            {
+                destroyNPC = npc;
+              //  Destroy(npc.gameObject);
+            }
+        }
+        if (destroyNPC)
+        {
+            //m_hipster.Remove(destroyNPC);
+        }
+    }
 
     public void SpawnHipster()
     {
@@ -25,6 +38,11 @@ public class NPCManager : MonoBehaviour {
         GameObject npc = GameObject.Instantiate(NPC);
         m_hipster.Add(npc.GetComponent<HipsterController>());
         NPCCount++;
+    }
+
+    public void KillHipster()
+    {
+
     }
 
 

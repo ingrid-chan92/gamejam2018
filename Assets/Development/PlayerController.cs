@@ -29,9 +29,10 @@ public class PlayerController : MonoBehaviour {
 
     void die() {
         state = PlayerStates.dying;
+        Debug.Log("I am slain");
     }
 
-    void damage(float amount) {
+    public void damage(int amount) {
         this.currentHealth -= amount;
         if (this.currentHealth < 0) {
             die();
