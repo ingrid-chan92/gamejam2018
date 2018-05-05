@@ -10,6 +10,7 @@ public class Managers : MonoBehaviour {
 	private GameProperties m_properties;
 	private PlayerManager m_playermanager;
 	private NPCManager m_npcmanager;
+    private StageManager m_stagemanager;
 
 	//Accessors
 	public static Managers GetInstance() {
@@ -43,6 +44,7 @@ public class Managers : MonoBehaviour {
 		m_gamestatemanager = gameObject.AddComponent<GameStateManager>();
 		m_playermanager = gameObject.AddComponent<PlayerManager> ();
 		m_npcmanager = gameObject.AddComponent<NPCManager> ();
+        m_stagemanager = gameObject.AddComponent<StageManager> ();
 
 		//preferably call init after
 		m_gamestatemanager.Init();
