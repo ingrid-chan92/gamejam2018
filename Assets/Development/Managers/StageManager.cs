@@ -125,10 +125,10 @@ public class StageManager : MonoBehaviour {
     {
         for (int i = 0; i < 5; i++)
         {
-            Vector3 spawnLocation = camera.transform.position + PixelToGame((camera.rect.width / 2 + 100) * -1, Random.Range(-320.0f, 320.0f), -1);
+            Vector3 spawnLocation = camera.transform.position + PixelToGame((camera.rect.width / 2 + 100) * -1, Random.Range(-320.0f, 0.0f), -1);
             Managers.GetInstance().GetNPCManager().SpawnHipster(spawnLocation);
 
-            spawnLocation = camera.transform.position + PixelToGame((camera.rect.width / 2 + 100), Random.Range(-320.0f, 320.0f), -1);
+            spawnLocation = camera.transform.position + PixelToGame((camera.rect.width / 2 + 100), Random.Range(-320.0f, 0.0f), -1);
             Managers.GetInstance().GetNPCManager().SpawnHipster(spawnLocation);
         }
     }
