@@ -8,7 +8,5 @@ public class GameStart : MonoBehaviour {
 	void Awake () {
 		DontDestroyOnLoad (this);
 		gameObject.AddComponent<Managers>();
-		
 	}
-
 }
