@@ -23,8 +23,7 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	public void SpawnCamera() {
-        SceneCamera = Managers.GetInstance().GetGameProperties().CameraPrefab;
-        GameObject.Instantiate(SceneCamera);        
+
 	}
 
 
