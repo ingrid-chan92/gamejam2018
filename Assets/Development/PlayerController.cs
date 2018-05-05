@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
         {
             transform.position = transform.position + step * Vector3.right;
 
-            if(transform.position.x > camera.transform.position.x)
+            if(transform.position.x > camera.transform.position.x && !Managers.GetInstance().GetStageManager().ActiveScene())
             {
                 camera.transform.Translate(step * Vector3.right);
             }

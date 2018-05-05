@@ -7,11 +7,9 @@ public class NPCManager : MonoBehaviour {
     private int NPCCount;
     private List<HipsterController> m_hipster = new List<HipsterController>();
 
-
     // Use this for initialization
     void Start () {
         NPCCount = 0;
-        SpawnHipster();
     }
 	
 	// Update is called once per frame
@@ -19,10 +17,11 @@ public class NPCManager : MonoBehaviour {
 
 	}
 
-    public void SpawnHipster()
+    public void SpawnHipster(Vector3 position)
     {
         NPC = Managers.GetInstance().GetGameProperties().HipsterPrefab;
         GameObject npc = GameObject.Instantiate(NPC);
+        npc.transform.SetPositionAndRotation(position, npc.transform.rotation);
         m_hipster.Add(npc.GetComponent<HipsterController>());
         NPCCount++;
     }
