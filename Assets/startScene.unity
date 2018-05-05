@@ -233,7 +233,11 @@ MonoBehaviour:
     type: 2}
   Hipster2Prefab: {fileID: 1295765754704324, guid: 71304cb5ad8e20242873f6c8e9909d0f,
     type: 2}
-  BossPrefab: {fileID: 0}
+  BossPrefab: {fileID: 1777326153467928, guid: 68bf7c95d39dd55499e02978a3cc6baa, type: 2}
+  SmallHealthPrefab: {fileID: 1700800095398474, guid: d66da71114ca3ae48a3495c76e7e41d7,
+    type: 2}
+  BigHealthPrefab: {fileID: 1587024346898566, guid: ebb553a8d1abeee469abc5b75aecb6c2,
+    type: 2}
 --- !u!114 &1123637137
 MonoBehaviour:
   m_ObjectHideFlags: 0

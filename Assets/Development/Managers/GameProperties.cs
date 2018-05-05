@@ -9,4 +9,6 @@ public class GameProperties : MonoBehaviour {
     public GameObject HipsterPrefab;
     public GameObject Hipster2Prefab;
     public GameObject BossPrefab;
+    public GameObject SmallHealthPrefab;
+    public GameObject BigHealthPrefab;
 }
