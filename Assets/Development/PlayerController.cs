@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     private PlayerStates state = PlayerStates.idle;
     private Animator animator;
     private Collider2D hurtbox;
+    private Vector3 initScale;
 
     private enum PlayerStates {
         stopped,
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour {
         currentHealth = startHealth;
         animator = this.GetComponentInChildren<Animator>();
         hurtbox = this.GetComponentInChildren<CircleCollider2D>();
+        this.initScale = transform.localScale;
     }
 
     void die() {
@@ -107,15 +109,22 @@ public class PlayerController : MonoBehaviour {
     }
 
     void throwRaccoon() {
+        animator.SetTrigger("throwing");
         GameObject raccoonPrefab = Managers.GetInstance().GetGameProperties().RaccoonPrefab;
 
         GameObject raccoon = GameObject.Instantiate(raccoonPrefab);
         raccoon.transform.SetPositionAndRotation(transform.position, transform.rotation);
 
-        Vector3 initialVelocity = new Vector3(-2, 2);
-        Debug.Log(initialVelocity);
-        initialVelocity = transform.rotation * initialVelocity;
-        Debug.Log(initialVelocity);
+
+        Vector3 initialVelocity;
+
+        if (transform.localScale.x < 0) {
+            initialVelocity = new Vector3(2, 2);
+            Vector3 racScale = raccoon.transform.localScale;
+            raccoon.transform.localScale = new Vector3(-1 * racScale.x, racScale.y, racScale.z);
+        } else {
+            initialVelocity = new Vector3(-2, 2);
+        }
 
         RaccoonController cntrl = raccoon.GetComponent<RaccoonController>();
         cntrl.SetVelocity(initialVelocity);
@@ -133,10 +142,16 @@ public class PlayerController : MonoBehaviour {
 
         transform.position += walkVector * step;
         if (walkVector.x > 0) {
-            transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+            //transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+            Vector3 newthing = this.initScale;
+            //newthing.x *= -1;
+            transform.localScale = newthing;
         }
         if (walkVector.x < 0) {
-            transform.rotation = Quaternion.identity;
+            //transform.rotation = Quaternion.identity;
+            Vector3 newthing = this.initScale;
+            newthing.x *= -1;
+            transform.localScale = newthing;
         }
 
         if(transform.position.x > camera.transform.position.x && !Managers.GetInstance().GetStageManager().ActiveScene()) {
