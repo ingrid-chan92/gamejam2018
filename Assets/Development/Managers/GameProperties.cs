@@ -9,4 +9,7 @@ public class GameProperties : MonoBehaviour {
     public GameObject HipsterPrefab;
     public GameObject Hipster2Prefab;
     public GameObject BossPrefab;
+    public GameObject GroundPrefab;
+    public GameObject DanielsPrefab;
+    public GameObject BackBuildingsPrefab;
 }
