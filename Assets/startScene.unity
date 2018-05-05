@@ -238,6 +238,8 @@ MonoBehaviour:
     type: 2}
   BigHealthPrefab: {fileID: 1587024346898566, guid: ebb553a8d1abeee469abc5b75aecb6c2,
     type: 2}
+  RaccoonItemPrefab: {fileID: 1718577629306516, guid: 872bad60d9353fd46b287cb10b2f1265,
+    type: 2}
 --- !u!114 &1123637137
 MonoBehaviour:
   m_ObjectHideFlags: 0

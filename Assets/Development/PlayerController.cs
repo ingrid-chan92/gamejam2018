@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour {
     public void damage(int amount) {
         this.currentHealth -= amount;
         //Debug.Log("Damaging player by " + amount + " units");
+        Debug.Log("Current Health = " + currentHealth);
         if (this.currentHealth < 0) {
             this.die();
         }
@@ -44,7 +45,6 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         Vector3 walkVector = Vector3.zero;
-        Debug.Log("Current Health = " + currentHealth);
 
         if (Input.GetKeyDown(KeyCode.J)) {
             this.die();

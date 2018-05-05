@@ -11,4 +11,5 @@ public class GameProperties : MonoBehaviour {
     public GameObject BossPrefab;
     public GameObject SmallHealthPrefab;
     public GameObject BigHealthPrefab;
+    public GameObject RaccoonItemPrefab;
 }
