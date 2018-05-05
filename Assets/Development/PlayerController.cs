@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     private int currentHealth;
     private Camera camera;
     private PlayerStates state = PlayerStates.idle;
+    private Animator animator;
 
     private enum PlayerStates {
         stopped,
@@ -25,10 +26,12 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         camera = Camera.main;
         currentHealth = startHealth;
+        animator = this.GetComponentInChildren<Animator>();
     }
 
     void die() {
         Debug.Log("The player has been killed because they are bad at video games");
+        animator.SetBool("dying", true);
         state = PlayerStates.dying;
     }
 
@@ -63,6 +66,9 @@ public class PlayerController : MonoBehaviour {
 
         if (walkVector != Vector3.zero) {
             this.walk(walkVector);
+            animator.SetBool("walking", true);
+        } else {
+            animator.SetBool("walking", false);
         }
 
     }
@@ -71,6 +77,8 @@ public class PlayerController : MonoBehaviour {
         if (this.state == PlayerStates.dead || this.state == PlayerStates.dying) {
             return;
         }
+
+        
 
         this.state = PlayerStates.walking;
         float step = speed * Time.deltaTime;

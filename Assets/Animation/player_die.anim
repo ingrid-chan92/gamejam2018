@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PlayerThrow
+  m_Name: player_die
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -32,7 +32,7 @@ AnimationClip:
       value: {fileID: 21300010, guid: 19234a6edac79ac4c8952369cf1ae43c, type: 3}
     - time: 0.3
       value: {fileID: 21300012, guid: 19234a6edac79ac4c8952369cf1ae43c, type: 3}
-    - time: 0.65
+    - time: 0.7
       value: {fileID: 21300012, guid: 19234a6edac79ac4c8952369cf1ae43c, type: 3}
     attribute: m_Sprite
     path: 
@@ -66,7 +66,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.7
+    m_StopTime: 0.75
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
