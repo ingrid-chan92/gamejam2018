@@ -100,6 +100,7 @@ public class HipsterController : MonoBehaviour {
     public void walkToPlayer(Vector3 playerPos)
     {
         float step = speed * Time.deltaTime;
+
         transform.position = Vector3.MoveTowards(transform.position, playerPos, step);
 
     }

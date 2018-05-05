@@ -28,14 +28,14 @@ public class PlayerController : MonoBehaviour {
     }
 
     void die() {
-        Debug.Log("The player has been killed because they are bad at video games");
+        //Debug.Log("The player has been killed because they are bad at video games");
         state = PlayerStates.dying;
-        Debug.Log("I am slain");
+        //Debug.Log("I am slain");
     }
 
     public void damage(int amount) {
         this.currentHealth -= amount;
-        Debug.Log("Damaging player by " + amount + " units");
+        //Debug.Log("Damaging player by " + amount + " units");
         if (this.currentHealth < 0) {
             this.die();
         }
@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         Vector3 walkVector = Vector3.zero;
+        Debug.Log("Current Health = " + currentHealth);
 
         if (Input.GetKeyDown(KeyCode.J)) {
             this.die();

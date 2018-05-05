@@ -43,10 +43,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dbc1d7a0597443ba884b3a74af1158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 193958, guid: b6e2c55f723cb4b83ab65cc914b7bf77, type: 2}
-  CameraPrefab: {fileID: 136084, guid: 91a2be2ea51e24a1ea4561127f7409d3, type: 2}
+  PlayerPrefab: {fileID: 1049031074774824, guid: 3a84e1e8a053a6c4891ddd2e8d828c93,
+    type: 2}
+  CameraPrefab: {fileID: 1797545108939864, guid: 242012838150536429228b1bef133ee4,
+    type: 2}
   LevelPrefab: {fileID: 115842, guid: c5addea24f8044ee68fff7e3d88e7eee, type: 2}
-  HipsterPrefab: {fileID: 0}
+  HipsterPrefab: {fileID: 1765459899123038, guid: 58ae96c91cdd90d4ab9da30cda72a8eb,
+    type: 2}
+  Hipster2Prefab: {fileID: 1295765754704324, guid: 71304cb5ad8e20242873f6c8e9909d0f,
+    type: 2}
+  BossPrefab: {fileID: 1777326153467928, guid: 68bf7c95d39dd55499e02978a3cc6baa, type: 2}
 --- !u!114 &11456954
 MonoBehaviour:
   m_ObjectHideFlags: 1

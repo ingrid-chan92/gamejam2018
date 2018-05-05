@@ -12,4 +12,6 @@ public class GameProperties : MonoBehaviour {
     public GameObject GroundPrefab;
     public GameObject DanielsPrefab;
     public GameObject BackBuildingsPrefab;
+    public GameObject SmallHealthPrefab;
+    public GameObject BigHealthPrefab;
 }

@@ -233,12 +233,15 @@ MonoBehaviour:
     type: 2}
   Hipster2Prefab: {fileID: 1295765754704324, guid: 2a4a687564224a840a0f4c12bdcd38cd,
     type: 2}
-  BossPrefab: {fileID: 0}
   GroundPrefab: {fileID: 1246691729393428, guid: a318e4d8d071dd7418662f988703e4cb,
     type: 2}
   DanielsPrefab: {fileID: 1852568171945222, guid: fbef7c135191d5e4990ef17bdd7d5b95,
     type: 2}
   BackBuildingsPrefab: {fileID: 1506514905708868, guid: ed89a0b3a2b3ffd4ba955283237eb5c0,
+  BossPrefab: {fileID: 1777326153467928, guid: 68bf7c95d39dd55499e02978a3cc6baa, type: 2}
+  SmallHealthPrefab: {fileID: 1700800095398474, guid: d66da71114ca3ae48a3495c76e7e41d7,
+    type: 2}
+  BigHealthPrefab: {fileID: 1587024346898566, guid: ebb553a8d1abeee469abc5b75aecb6c2,
     type: 2}
 --- !u!114 &1123637137
 MonoBehaviour:
