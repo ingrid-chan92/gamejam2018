@@ -39,10 +39,13 @@ public class GameStateManager : MonoBehaviour {
         //camera.transform.Translate(new Vector3(0.01f, 0, 0));
 	}
 
-	public void Init() {
+	public void Init()
+    {
 
-		// Initialise the bookstateDictionary
-		m_gameStateDictionary.Add(Enums.GameStateNames.GS_01_MENU, new GameStateMenu(this));
+        GameObject.Instantiate(Managers.GetInstance().GetGameProperties().CameraPrefab);
+
+        // Initialise the bookstateDictionary
+        m_gameStateDictionary.Add(Enums.GameStateNames.GS_01_MENU, new GameStateMenu(this));
 		m_gameStateDictionary.Add(Enums.GameStateNames.GS_02_LOADING, new GameStateLoading(this));
 		m_gameStateDictionary.Add(Enums.GameStateNames.GS_03_INPLAY, new GameStateInPlay(this));
 		m_gameStateDictionary.Add(Enums.GameStateNames.GS_04_LEAVING, new GameStateLeaving(this));
