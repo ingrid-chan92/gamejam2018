@@ -225,9 +225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dbc1d7a0597443ba884b3a74af1158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 0}
+  PlayerPrefab: {fileID: 1449269046921826, guid: 3a84e1e8a053a6c4891ddd2e8d828c93,
+    type: 2}
   CameraPrefab: {fileID: 0}
   LevelPrefab: {fileID: 0}
+  HipsterPrefab: {fileID: 1765459899123038, guid: 58ae96c91cdd90d4ab9da30cda72a8eb,
+    type: 2}
 --- !u!114 &1123637137
 MonoBehaviour:
   m_ObjectHideFlags: 0

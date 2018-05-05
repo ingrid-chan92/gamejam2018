@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour {
 	void Start () {
 		Player = null;
 		SceneCamera = null;
+        SpawnPlayer();
 	}
 	
 	// Update is called once per frame
