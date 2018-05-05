@@ -13,7 +13,14 @@ public class StageManager : MonoBehaviour {
 
     private Camera camera;
 
+    public float spawnTime = 5.0f;
+    private float spawnTimer = 0.0f;
+
     public float potholeChance = 0.2f;
+
+    private bool complete = true;
+    private int waves = 0;
+    private int currentScene = 0;
 
     private List<GameObject> backgroundObjects = new List<GameObject>();
     private List<GameObject> potholes = new List<GameObject>();
@@ -27,6 +34,11 @@ public class StageManager : MonoBehaviour {
     {
         Vector3 result = new Vector3(x * 100, y * 100, z * 100);
         return result;
+    }
+
+    public bool ActiveScene()
+    {
+        return !complete;
     }
 
     bool isOutOfBounds(GameObject obj) {
@@ -69,6 +81,26 @@ public class StageManager : MonoBehaviour {
         }
     }
 
+    void spawnNPCs()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 spawnLocation = camera.transform.position + PixelToGame((camera.rect.width / 2 + 100) * -1, Random.Range(-320.0f, 320.0f), -1);
+            Managers.GetInstance().GetNPCManager().SpawnHipster(spawnLocation);
+
+            spawnLocation = camera.transform.position + PixelToGame((camera.rect.width / 2 + 100), Random.Range(-320.0f, 320.0f), -1);
+            Managers.GetInstance().GetNPCManager().SpawnHipster(spawnLocation);
+        }
+    }
+
+    void newScene(int waves)
+    {
+        complete = false;
+        this.waves = waves;
+
+        addNewTile();
+    }
+
     // Use this for initialization
     void Start () {
         camera = Camera.main;
@@ -84,21 +116,40 @@ public class StageManager : MonoBehaviour {
         for (int i = 0; i < 3; i++) {
             addNewTile();
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!complete && waves > 0)
+        {
+            spawnTimer -= Time.deltaTime;
+
+            if (spawnTimer <= 0.0f)
+            {
+                spawnTimer = spawnTime;
+
+                spawnNPCs();
+                waves -= 1;
+
+                if (waves <= 0)
+                {
+                    complete = true;
+                    spawnTimer = 0.0f;
+                }
+            }
+        }
+
         if (backgroundObjects.Count > 0)
         {
             GameObject obj = backgroundObjects[0];
             if (isOutOfBounds(obj))
             {
-                addNewTile();
-
                 GameObject.Destroy(obj);
                 backgroundObjects.Remove(obj);
+                
+                currentScene += 1;
+                newScene(currentScene);
             }
         }
         if (potholes.Count > 0)
