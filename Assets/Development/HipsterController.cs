@@ -122,16 +122,17 @@ public class HipsterController : MonoBehaviour {
     {
         if (playerPos.x < transform.position.x)
         {
+            
             if (direction != "left")
-            { 
-                transform.Rotate(0, 180, 0);
+            {
+                transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
             }
             return "left";
         } else
         {
             if (direction != "right")
             {
-                transform.Rotate(0, -180, 0);
+                transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
             }
             return "right";
         }
