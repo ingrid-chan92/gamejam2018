@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour {
     public float speed = 2f;
     public float ySpeedMult = 0.5f; // Multiplier for speed when moving up or down
     public int startHealth = 100;
+    public int punchDamage = 10;
     private int currentHealth;
     private Camera camera;
     private PlayerStates state = PlayerStates.idle;
     private Animator animator;
+    private Collider2D hurtbox;
 
     private enum PlayerStates {
         stopped,
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour {
         camera = Camera.main;
         currentHealth = startHealth;
         animator = this.GetComponentInChildren<Animator>();
+        hurtbox = this.GetComponentInChildren<CircleCollider2D>();
     }
 
     void die() {
@@ -37,6 +40,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void damage(int amount) {
+        if (this.currentHealth < 0) {
+            return;
+        }
         this.currentHealth -= amount;
         Debug.Log("Damaging player by " + amount + " units");
         if (this.currentHealth < 0) {
@@ -65,6 +71,10 @@ public class PlayerController : MonoBehaviour {
             walkVector += (Vector3.down * ySpeedMult);
         }
 
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            attack();
+        }
+
         if (walkVector != Vector3.zero) {
             this.walk(walkVector);
             animator.SetBool("walking", true);
@@ -72,6 +82,20 @@ public class PlayerController : MonoBehaviour {
             animator.SetBool("walking", false);
         }
 
+    }
+
+    void attack() {
+        animator.SetTrigger("punch");
+        Collider2D[] results = new Collider2D[20];
+        ContactFilter2D filter = new ContactFilter2D();
+        int resultCount = hurtbox.OverlapCollider(filter, results);
+        Debug.Log("Attack contacting " + resultCount + " other things");
+
+        for (int i = 0; i < resultCount; i++) {
+            HipsterController enemy;
+            enemy = results[i].GetComponentInParent<HipsterController>();
+            enemy.Damage(punchDamage);
+        }
     }
 
     void walk(Vector3 walkVector) {
