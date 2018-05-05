@@ -35,6 +35,9 @@ public class GameStateManager : MonoBehaviour {
 			m_currentGameStateIndex = m_nextGameStateIndex;
 			m_nextGameStateIndex = Enums.GameStateNames.GS_00_NULL;
 		}
+
+        Camera camera = Camera.main;
+        camera.transform.Translate(new Vector3(0.01f, 0, 0));
 	}
 
 	public void Init() {
