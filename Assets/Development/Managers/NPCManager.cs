@@ -43,7 +43,7 @@ public class NPCManager : MonoBehaviour {
 
     public void SpawnHipster(Vector3 position)
     {
-        if (Random.Range(0.0f,3.0f) < 1f)
+        if (Random.Range(0,2) < 1)
         {
             NPC = Managers.GetInstance().GetGameProperties().HipsterPrefab;
         }
