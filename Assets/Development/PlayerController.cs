@@ -56,6 +56,23 @@ public class PlayerController : MonoBehaviour {
         }
         this.remainingIFrameTime = iFrameTime;
 
+        GameObject damageTextPrefab = Managers.GetInstance().GetGameProperties().FloatText;
+
+        GameObject damageText = GameObject.Instantiate(damageTextPrefab);
+        damageText.transform.position = transform.position + (Vector3.up * 0.4f);
+        FloatTextController cntrl = damageText.GetComponent<FloatTextController>();
+        if (amount > 0)
+        {
+            cntrl.setText(amount.ToString());
+            cntrl.setColor(Color.red);
+        }
+        if (amount < 0)
+        {
+            cntrl.setText("++" + amount.ToString());
+            cntrl.setColor(Color.blue);
+        }
+        
+
         this.currentHealth -= amount;
         if (this.currentHealth > this.startHealth) {
             this.currentHealth = this.startHealth;

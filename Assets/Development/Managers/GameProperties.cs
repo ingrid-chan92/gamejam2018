@@ -15,6 +15,7 @@ public class GameProperties : MonoBehaviour {
     public GameObject RaccoonPrefab;
     public GameObject RaccoonItemPrefab;
     public GameObject GoatPrefab;
+    public GameObject FloatText;
 
     // Buildings
     public GameObject PoorFence;

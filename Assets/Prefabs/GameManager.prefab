@@ -60,9 +60,12 @@ MonoBehaviour:
     type: 2}
   BigHealthPrefab: {fileID: 1587024346898566, guid: ebb553a8d1abeee469abc5b75aecb6c2,
     type: 2}
+  RaccoonPrefab: {fileID: 1953621493684396, guid: e1ee03078a1baee4c949c7120d4bcb48,
+    type: 2}
   RaccoonItemPrefab: {fileID: 1718577629306516, guid: 872bad60d9353fd46b287cb10b2f1265,
     type: 2}
   GoatPrefab: {fileID: 1584025433298570, guid: f2d45c2ff810fbf49be3b9bdf9e1ca01, type: 2}
+  FloatText: {fileID: 1554955883779690, guid: 92651dbc0fe61324c812a35f92e09a8b, type: 2}
   PoorFence: {fileID: 1237875904335572, guid: 83a29ea5609db9b408e4a1281c5e42af, type: 2}
   PoorBuildings:
   - {fileID: 1326161160107244, guid: d1615ad81e8352b4698254b82335a8b4, type: 2}
