@@ -27,7 +27,7 @@ public class StageManager : MonoBehaviour {
     private int currentScene = 0;
     private bool bossSpawned = false;
 
-    private int bossScene = 2;
+    private int bossScene = 5;
 
     private GameObject groundPrefab;
     private GameObject buildingPrefab;
@@ -250,7 +250,7 @@ public class StageManager : MonoBehaviour {
             {
                 spawnTimer = spawnTime;
 
-                spawnNPCs(5);
+                spawnNPCs(currentScene + 1);
                 waves -= 1;
             } 
         } else if (currentScene == bossScene && !bossSpawned)

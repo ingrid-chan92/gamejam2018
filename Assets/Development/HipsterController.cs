@@ -166,7 +166,20 @@ public class HipsterController : MonoBehaviour {
 
     public void Damage(int damageVal)
     {
+        if (health < 0)
+        {
+            return;
+        }
         health -= damageVal;
+
+        GameObject damageTextPrefab = Managers.GetInstance().GetGameProperties().FloatText;
+
+        GameObject damageText = GameObject.Instantiate(damageTextPrefab);
+        damageText.transform.position = transform.position + (Vector3.up * 0.4f);
+        FloatTextController cntrl = damageText.GetComponent<FloatTextController>();
+        cntrl.setText(damageVal.ToString());
+        cntrl.setColor(Color.green);
+
         if (health <= 0)
         {
             die();
