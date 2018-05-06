@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -8,6 +9,9 @@ public class PlayerController : MonoBehaviour {
     public float ySpeedMult = 0.5f; // Multiplier for speed when moving up or down
     public int startHealth = 100;
     public int punchDamage = 10;
+    public float iFrameTime = 1.0f;
+    public float attackIntervalSeconds = 0.75f;
+    private float timeSinceAttack;
     private int currentHealth;
     private Camera camera;
     private PlayerStates state = PlayerStates.idle;
@@ -16,6 +20,12 @@ public class PlayerController : MonoBehaviour {
     private Collider2D hurtbox;
     private Vector3 initScale;
     private LayerMask enemiesMask;
+    private float remainingIFrameTime = 0f;
+    public int numRaccoons = 0;
+    private GameObject HP;
+    private GameObject healthBar;
+    private GameObject raccoonBar;
+    private GameObject RC;
 
     private enum PlayerStates {
         stopped,
@@ -35,6 +45,17 @@ public class PlayerController : MonoBehaviour {
         hurtbox = this.GetComponentInChildren<CircleCollider2D>();
         this.initScale = transform.localScale;
         enemiesMask = ~((1 << 8) | (1 << 9));
+
+        HP = Managers.GetInstance().GetGameProperties().HealthBar;
+        healthBar = GameObject.Instantiate(HP);
+        Text hpText = healthBar.GetComponentInChildren<Text>();
+        hpText.text = currentHealth.ToString();
+        this.timeSinceAttack = attackIntervalSeconds;
+
+        RC = Managers.GetInstance().GetGameProperties().RaccoonBar;
+        raccoonBar = GameObject.Instantiate(RC);
+        Text raccoonText = raccoonBar.GetComponentInChildren<Text>();
+        raccoonText.text = numRaccoons.ToString();
     }
 
     void die() {
@@ -46,7 +67,42 @@ public class PlayerController : MonoBehaviour {
         if (this.currentHealth < 0) {
             return;
         }
+        if (this.remainingIFrameTime > 0 && amount > 0)
+        {
+            //Debug.Log("player is invincible right now, for " + remainingIFrameTime + " more seconds");
+            return;
+        }
+        if (amount > 0)
+        {
+            this.remainingIFrameTime = iFrameTime;
+        }
+
+        GameObject damageTextPrefab = Managers.GetInstance().GetGameProperties().FloatText;
+
+        GameObject damageText = GameObject.Instantiate(damageTextPrefab);
+        damageText.transform.position = transform.position + (Vector3.up * 0.4f);
+        FloatTextController cntrl = damageText.GetComponent<FloatTextController>();
+        if (amount > 0)
+        {
+            cntrl.setText(amount.ToString());
+            cntrl.setColor(Color.red);
+        }
+        if (amount < 0)
+        {
+            cntrl.setText("++" + (amount * -1).ToString());
+            cntrl.setColor(Color.cyan);
+        }
+        
         this.currentHealth -= amount;
+
+        Text hpText = healthBar.GetComponentInChildren<Text>();
+        string healthString = currentHealth.ToString();
+        if (currentHealth < 0) {
+            healthString = "0";
+        } else if (currentHealth >= startHealth) {
+            healthString = startHealth.ToString();
+        }
+        hpText.text = healthString;
 
         if (this.currentHealth > this.startHealth) {
             this.currentHealth = this.startHealth;
@@ -58,6 +114,25 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        Text raccoonText = raccoonBar.GetComponentInChildren<Text>();
+        string raccoonString = numRaccoons.ToString();
+        if (numRaccoons < 0)
+        {
+            raccoonString = "0";
+        }
+        raccoonText.text = raccoonString;
+
+        if (this.remainingIFrameTime > 0)
+        {
+            this.remainingIFrameTime -= Time.deltaTime;
+        }
+
+        if (timeSinceAttack < attackIntervalSeconds)
+        {
+            timeSinceAttack += Time.deltaTime;
+        }
+
         Vector3 walkVector = Vector3.zero;
 
         if (state == PlayerStates.dead || state == PlayerStates.dying)
@@ -68,9 +143,6 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.J)) {
-            this.die();
-        }
         Camera cam = Camera.main;
         float camX = cam.transform.position.x;
         float maxL = camX - 3f;
@@ -108,6 +180,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     void attack() {
+        if (timeSinceAttack < attackIntervalSeconds)
+        {
+            return;
+        }
+        timeSinceAttack = 0f;
+
         animator.SetTrigger("punch");
         Collider2D[] results = new Collider2D[20];
 
@@ -115,7 +193,6 @@ public class PlayerController : MonoBehaviour {
         filter.layerMask = enemiesMask;
         filter.useLayerMask = true;
         int resultCount = hurtbox.OverlapCollider(filter, results);
-        Debug.Log("Attack contacting " + resultCount + " other things");
 
         for (int i = 0; i < resultCount; i++) {
             HipsterController enemy;
@@ -125,6 +202,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     void throwRaccoon() {
+        if (this.numRaccoons <= 0)
+        {
+            return;
+        }
+        this.numRaccoons--;
+        
         animator.SetTrigger("throwing");
         GameObject raccoonPrefab = Managers.GetInstance().GetGameProperties().RaccoonPrefab;
 
@@ -135,15 +218,18 @@ public class PlayerController : MonoBehaviour {
         Vector3 initialVelocity;
 
         if (transform.localScale.x < 0) {
-            initialVelocity = new Vector3(2, 2);
+            initialVelocity = new Vector3(-2, 2);
             Vector3 racScale = raccoon.transform.localScale;
             raccoon.transform.localScale = new Vector3(-1 * racScale.x, racScale.y, racScale.z);
+
         } else {
-            initialVelocity = new Vector3(-2, 2);
+            initialVelocity = new Vector3(2, 2);
+            
         }
 
         RaccoonController cntrl = raccoon.GetComponent<RaccoonController>();
         cntrl.SetVelocity(initialVelocity);
+        cntrl.SetShadowY(transform.position.y - 0.25f);
     }
 
     void walk(Vector3 walkVector) {

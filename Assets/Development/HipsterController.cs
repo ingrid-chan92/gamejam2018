@@ -33,9 +33,9 @@ public class HipsterController : MonoBehaviour {
         atkTimer = fullAttackTime;
         dead = false;
         fullDead = false;
-        attackDist = .8f;
+        attackDist = 1;
         deadTime = 3f;
-        float randNum = Random.Range(0.0f, 100.0f);
+        float randNum = Random.Range(0, 100);
         hasBox = true;
         chatBoxTimer = 5.0f;
         if (randNum > chatBoxChance)
@@ -91,11 +91,7 @@ public class HipsterController : MonoBehaviour {
         {
             attack(playPos);
         }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            this.die();
-        }
+        
     }
 
     private string getState(Vector3 playerPos)
@@ -166,7 +162,20 @@ public class HipsterController : MonoBehaviour {
 
     public void Damage(int damageVal)
     {
+        if (health < 0)
+        {
+            return;
+        }
         health -= damageVal;
+
+        GameObject damageTextPrefab = Managers.GetInstance().GetGameProperties().FloatText;
+
+        GameObject damageText = GameObject.Instantiate(damageTextPrefab);
+        damageText.transform.position = transform.position + (Vector3.up * 0.4f);
+        FloatTextController cntrl = damageText.GetComponent<FloatTextController>();
+        cntrl.setText(damageVal.ToString());
+        cntrl.setColor(Color.green);
+
         if (health <= 0)
         {
             die();

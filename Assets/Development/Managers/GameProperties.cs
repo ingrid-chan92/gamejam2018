@@ -15,11 +15,15 @@ public class GameProperties : MonoBehaviour {
     public GameObject RaccoonPrefab;
     public GameObject RaccoonItemPrefab;
     public GameObject GoatPrefab;
+    public GameObject FloatText;
     public GameObject MenuPrefab;
     public GameObject GameOverPrefab;
     public GameObject WinPrefab;
     public GameObject LevelMusic;
     public GameObject BossMusic;
+    public GameObject HealthBar;
+    public GameObject RaccoonBar;
+    public GameObject Arrow;
 
     // Buildings
     public GameObject PoorFence;

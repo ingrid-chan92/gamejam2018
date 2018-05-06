@@ -29,7 +29,7 @@ public class PowerupController : MonoBehaviour {
 
         if (heal == 0 && Vector3.Distance(Player.transform.position, transform.position) < .5)
         {
-            Debug.Log("CUTE RACCOON!!!!!!!!!!");
+            Player.GetComponent<PlayerController>().numRaccoons++;
             used = true;
         }
 

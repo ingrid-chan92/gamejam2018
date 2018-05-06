@@ -15,18 +15,28 @@ public class StageManager : MonoBehaviour {
     private Sprite pothole1Sprite;
 
     private Camera camera;
+    private Vector3 cameraPreviousPosition;
 
-    public float spawnTime = 5.0f;
+    public float spawnTime = 1.0f;
+    private float spawnTime2 = 5.0f;
     private float spawnTimer = 0.0f;
 
     public float potholeChance = 0.2f;
 
+    private bool arrowCanBeShown = true;
+
+    private int buildingsPast = 0;
+
     private bool complete = true;
     private int waves = 0;
+    private int stream = 0;
     private int currentScene = 0;
     private bool bossSpawned = false;
 
-    private int bossScene = 2;
+    private GameObject arrow;
+    private GameObject AR;
+
+    private int bossScene = 5;
 
     private GameObject groundPrefab;
     private GameObject buildingPrefab;
@@ -78,12 +88,12 @@ public class StageManager : MonoBehaviour {
 
         if (backBuildings.Count == 0)
         {
-            backBuilding.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, 180, 1000), backBuilding.transform.rotation);
+            backBuilding.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, 190, 1000), backBuilding.transform.rotation);
         }
         else
         {
             GameObject lastTile = backBuildings[backBuildings.Count - 1];
-            backBuilding.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (backBuildingTexture.width * backBuilding.transform.localScale.x), 180, 1000), backBuilding.transform.rotation);
+            backBuilding.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (backBuildingTexture.width * backBuilding.transform.localScale.x), 190, 1000), backBuilding.transform.rotation);
         }
 
         backBuildings.Add(backBuilding);
@@ -186,17 +196,25 @@ public class StageManager : MonoBehaviour {
     void newScene(int waves)
     {
         complete = false;
-        this.waves = waves;
+
+        this.waves = (waves / 2) + 1;
+        stream = (waves % this.waves) + 1;
+
+        Debug.Log(stream);
+        Debug.Log(this.waves);
     }
 
     // Use this for initialization
     void Start () {
         camera = Camera.main;
 
+        AR = Managers.GetInstance().GetGameProperties().Arrow;
+        arrow = GameObject.Instantiate(AR);
+
         musicPrefab = Managers.GetInstance().GetGameProperties().LevelMusic;
         music = GameObject.Instantiate(musicPrefab);
 
-
+        cameraPreviousPosition = camera.transform.position;
 
         groundPrefab = Managers.GetInstance().GetGameProperties().GroundPrefab;
 
@@ -243,15 +261,25 @@ public class StageManager : MonoBehaviour {
     {
         if (!complete && currentScene < bossScene && waves > 0)
         {
+            arrowCanBeShown = true;
             spawnTimer -= Time.deltaTime;
 
-            if (spawnTimer <= 0.0f)
+            if (spawnTimer <= 0.0f && stream > 0)
             {
                 spawnTimer = spawnTime;
 
-                spawnNPCs(5);
+                spawnNPCs(1);
+                stream -= 1;
+            }
+            else if (spawnTimer <= 0.0f)
+            {
                 waves -= 1;
-            } 
+                if (waves > 0)
+                {
+                    spawnTimer = spawnTime2;
+                    stream = (currentScene % ((currentScene / 2) + 1)) + 1;
+                }
+            }
         } else if (currentScene == bossScene && !bossSpawned)
         {
             bossSpawned = true;
@@ -265,16 +293,38 @@ public class StageManager : MonoBehaviour {
 
             if (spawnTimer <= 0.0f)
             {
-                spawnTimer = spawnTime;
+                spawnTimer = spawnTime * 4;
                 spawnNPCs(1);
             }
         }
 
-        if (Managers.GetInstance().GetNPCManager().allEnemiesDead() && waves <= 0)
+        if (Managers.GetInstance().GetNPCManager().allEnemiesDead() && waves <= 0 && stream <= 0)
         {
             complete = true;
             spawnTimer = 0.0f;
+
+            waves = 0;
+            stream = 0;
+
+            if (arrowCanBeShown == true)
+            {
+                arrow.SetActive(true);
+            }
         }
+
+        Vector3 cameraDiff = camera.transform.position - cameraPreviousPosition;
+
+        if (cameraDiff.x > 0)
+        {
+            arrow.SetActive(false);
+            arrowCanBeShown = false;
+        }
+
+        foreach (GameObject backBuilding in backBuildings)
+        {
+            backBuilding.transform.Translate(cameraDiff / 2);
+        }
+        cameraPreviousPosition = camera.transform.position;
 
         if (grounds.Count > 0)
         {
@@ -285,6 +335,7 @@ public class StageManager : MonoBehaviour {
                 grounds.Remove(obj);
                 addNewGround();
 
+                buildingsPast += 1;
             }
         }
         if (buildings.Count > 0)
@@ -310,9 +361,6 @@ public class StageManager : MonoBehaviour {
                 backBuildings.Remove(obj);
 
                 addNewBackBuilding();
-
-                currentScene += 1;
-                newScene(currentScene);
             }
         }
         if (potholes.Count > 0)
@@ -323,6 +371,13 @@ public class StageManager : MonoBehaviour {
                 GameObject.Destroy(obj);
                 potholes.Remove(obj);
             }
+        }
+
+        if (buildingsPast >= 1)
+        {
+            currentScene += 1;
+            newScene(currentScene);
+            buildingsPast = 0;
         }
     }
 

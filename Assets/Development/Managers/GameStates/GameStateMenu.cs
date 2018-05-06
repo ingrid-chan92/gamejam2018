@@ -11,7 +11,6 @@ public class GameStateMenu : GameStateBase {
 
 	public override void EnterState(Enums.GameStateNames p_prevState)
 	{
-		Debug.Log ("In Menu State");
 		//spawn menu here
 	}
 
