@@ -118,6 +118,16 @@ public class StageManager : MonoBehaviour {
         buildings.Add(building);
 
         fence.transform.SetPositionAndRotation(PixelToGame(GameToPixel(building.transform.position.x, 0, 0).x + (building1Texture.width * fence.transform.localScale.x), 60, -1000), fence.transform.rotation);
+
+        int randGoat = Random.Range(0, 10);
+        Debug.Log("goat - " + randGoat);
+        if (randGoat <= 1)
+        {
+            GameObject goat = GameObject.Instantiate(Managers.GetInstance().GetGameProperties().GoatPrefab);
+            goat.transform.SetPositionAndRotation(PixelToGame(GameToPixel(building.transform.position.x, 0, 0).x + (building1Texture.width * fence.transform.localScale.x), 80, -2), fence.transform.rotation);
+        }
+
+
         buildings.Add(fence);
     }
 
@@ -201,9 +211,6 @@ public class StageManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(complete);
-        Debug.Log(spawnTimer);
-        Debug.Log(currentScene);
         if (!complete && currentScene < bossScene && waves > 0)
         {
             spawnTimer -= Time.deltaTime;
