@@ -22,6 +22,8 @@ public class StageManager : MonoBehaviour {
 
     public float potholeChance = 0.2f;
 
+    private int buildingsPast = 1;
+
     private bool complete = true;
     private int waves = 0;
     private int currentScene = 0;
@@ -266,7 +268,7 @@ public class StageManager : MonoBehaviour {
 
             if (spawnTimer <= 0.0f)
             {
-                spawnTimer = spawnTime;
+                spawnTimer = spawnTime / 2;
                 spawnNPCs(1);
             }
         }
@@ -307,6 +309,7 @@ public class StageManager : MonoBehaviour {
                 buildings.Remove(obj2);
 
                 addNewBuilding();
+                buildingsPast += 1;
             }
         }
         if (backBuildings.Count > 0)
@@ -318,9 +321,6 @@ public class StageManager : MonoBehaviour {
                 backBuildings.Remove(obj);
 
                 addNewBackBuilding();
-
-                currentScene += 1;
-                newScene(currentScene);
             }
         }
         if (potholes.Count > 0)
@@ -331,6 +331,13 @@ public class StageManager : MonoBehaviour {
                 GameObject.Destroy(obj);
                 potholes.Remove(obj);
             }
+        }
+
+        if (buildingsPast >= 2)
+        {
+            currentScene += 1;
+            newScene(currentScene);
+            buildingsPast = 0;
         }
     }
 
