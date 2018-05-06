@@ -28,14 +28,15 @@ public class PlayerController : MonoBehaviour {
     }
 
     void die() {
-        Debug.Log("The player has been killed because they are bad at video games");
+        //Debug.Log("The player has been killed because they are bad at video games");
         state = PlayerStates.dying;
-        Debug.Log("I am slain");
+        //Debug.Log("I am slain");
     }
 
     public void damage(int amount) {
         this.currentHealth -= amount;
-        Debug.Log("Damaging player by " + amount + " units");
+        //Debug.Log("Damaging player by " + amount + " units");
+        Debug.Log("Current Health = " + currentHealth);
         if (this.currentHealth < 0) {
             this.die();
         }

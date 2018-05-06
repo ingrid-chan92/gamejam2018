@@ -1,27 +1,24 @@
 fileFormatVersion: 2
-guid: 02f4a70f453a5554bba14680d1b1b248
-timeCreated: 1525555214
+guid: 2702498d0ae8a584088da2d62d12d5af
+timeCreated: 1525551752
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: walk_boss_0
-    21300002: walk_boss_1
-    21300004: walk_boss_2
-    21300006: walk_boss_3
-    21300008: walk_boss_4
-    21300010: walk_boss_5
-    21300012: walk_boss_6
-    21300014: walk_boss_7
-    21300016: walk_boss_8
-    21300018: walk_boss_9
-    21300020: walk_boss_10
-    21300022: walk_boss_11
-    21300024: walk_boss_12
-    21300026: walk_boss_13
-    21300028: walk_boss_14
-    21300030: walk_boss_15
-    21300032: walk_boss_16
-    21300034: walk_boss_17
+    21300000: enemy2_attack_0
+    21300002: enemy2_attack_1
+    21300004: enemy2_attack_2
+    21300006: enemy2_attack_3
+    21300008: enemy2_attack_4
+    21300010: enemy2_attack_5
+    21300012: enemy2_attack_6
+    21300014: enemy2_attack_7
+    21300016: enemy2_attack_8
+    21300018: enemy2_attack_9
+    21300020: enemy2_attack_10
+    21300022: enemy2_attack_11
+    21300024: enemy2_attack_12
+    21300026: enemy2_attack_13
+    21300028: enemy2_attack_14
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -141,13 +138,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: walk_boss_0
+      name: enemy2_attack_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 4216
-        width: 265
-        height: 248
+        x: 16
+        y: 3562
+        width: 150
+        height: 241
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,13 +152,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_1
+      name: enemy2_attack_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 3968
-        width: 265
-        height: 248
+        x: 21
+        y: 3304
+        width: 158
+        height: 246
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,13 +166,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_2
+      name: enemy2_attack_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 3720
-        width: 265
-        height: 248
+        x: 27
+        y: 3051
+        width: 166
+        height: 239
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,13 +180,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_3
+      name: enemy2_attack_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 3472
-        width: 265
-        height: 248
+        x: 29
+        y: 2795
+        width: 174
+        height: 236
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,13 +194,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_4
+      name: enemy2_attack_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 3224
-        width: 265
-        height: 248
+        x: 36
+        y: 2540
+        width: 176
+        height: 233
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,13 +208,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_5
+      name: enemy2_attack_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2976
-        width: 265
-        height: 248
+        x: 38
+        y: 2287
+        width: 177
+        height: 235
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,13 +222,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_6
+      name: enemy2_attack_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2728
-        width: 265
-        height: 248
+        x: 34
+        y: 2036
+        width: 132
+        height: 242
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,13 +236,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_7
+      name: enemy2_attack_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2480
-        width: 265
-        height: 248
+        x: 21
+        y: 1779
+        width: 120
+        height: 246
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,13 +250,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_8
+      name: enemy2_attack_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 2232
-        width: 265
-        height: 248
+        y: 1525
+        width: 127
+        height: 243
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,13 +264,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_9
+      name: enemy2_attack_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1984
-        width: 265
-        height: 248
+        x: 7
+        y: 1273
+        width: 124
+        height: 246
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,13 +278,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_10
+      name: enemy2_attack_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1736
-        width: 265
-        height: 248
+        x: 22
+        y: 1019
+        width: 111
+        height: 243
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -295,13 +292,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_11
+      name: enemy2_attack_11
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1488
-        width: 265
-        height: 248
+        x: 22
+        y: 766
+        width: 114
+        height: 243
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -309,13 +306,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_12
+      name: enemy2_attack_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1240
-        width: 265
-        height: 248
+        x: 21
+        y: 513
+        width: 119
+        height: 241
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,13 +320,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_13
+      name: enemy2_attack_13
       rect:
         serializedVersion: 2
-        x: 0
-        y: 992
-        width: 265
-        height: 248
+        x: 15
+        y: 258
+        width: 127
+        height: 242
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -337,55 +334,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk_boss_14
+      name: enemy2_attack_14
       rect:
         serializedVersion: 2
-        x: 0
-        y: 744
-        width: 265
-        height: 248
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: walk_boss_15
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 496
-        width: 265
-        height: 248
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: walk_boss_16
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 248
-        width: 265
-        height: 248
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: walk_boss_17
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 14
         y: 0
-        width: 265
-        height: 248
+        width: 134
+        height: 246
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
