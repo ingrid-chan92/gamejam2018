@@ -6,9 +6,10 @@ public class StageManager : MonoBehaviour {
     private Texture2D pothole1Texture;
     private Texture2D pothole2Texture;
     private Texture2D groundTexture;
-
-    private Texture2D building1Texture;
+    
     private Texture2D backBuildingTexture;
+
+    private Texture2D poorfenceTexture;
 
     private Sprite pothole2Sprite;
     private Sprite pothole1Sprite;
@@ -35,7 +36,12 @@ public class StageManager : MonoBehaviour {
     private List<GameObject> grounds = new List<GameObject>();
     private List<GameObject> potholes = new List<GameObject>();
     private List<GameObject> buildings = new List<GameObject>();
+    private List<int> buildingWidths = new List<int>();
     private List<GameObject> backBuildings = new List<GameObject>();
+
+    private List<Texture2D> fenceTextures = new List<Texture2D>();
+    private List<Texture2D> poorBuildingTextures = new List<Texture2D>();
+    private List<Texture2D> richBuildingTextures = new List<Texture2D>();
 
     Vector3 PixelToGame(float x, float y, float z) {
         Vector3 result = new Vector3(x / 100, y / 100, z / 100);
@@ -70,12 +76,12 @@ public class StageManager : MonoBehaviour {
 
         if (backBuildings.Count == 0)
         {
-            backBuilding.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, 200, 1000), backBuilding.transform.rotation);
+            backBuilding.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, 180, 1000), backBuilding.transform.rotation);
         }
         else
         {
             GameObject lastTile = backBuildings[backBuildings.Count - 1];
-            backBuilding.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (backBuildingTexture.width * backBuilding.transform.localScale.x), 200, 1000), backBuilding.transform.rotation);
+            backBuilding.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (backBuildingTexture.width * backBuilding.transform.localScale.x), 180, 1000), backBuilding.transform.rotation);
         }
 
         backBuildings.Add(backBuilding);
@@ -87,46 +93,51 @@ public class StageManager : MonoBehaviour {
         int randRich = Random.Range(0, 5);
         int randSetting = Random.Range(1, bossScene);
 
+        Texture2D fenceTex;
+        Texture2D buildingTex;
         if (randSetting <= currentScene)
         {
             buildingPrefab = Managers.GetInstance().GetGameProperties().GentrifiedBuildings[randRich];
             fencePrefab = Managers.GetInstance().GetGameProperties().RichFence[randPoor];
+            fenceTex = fenceTextures[randPoor];
+            buildingTex = richBuildingTextures[randRich];
         } else
         {
             buildingPrefab = Managers.GetInstance().GetGameProperties().PoorBuildings[randPoor];
             fencePrefab = Managers.GetInstance().GetGameProperties().PoorFence;
+            fenceTex = poorfenceTexture;
+            buildingTex = poorBuildingTextures[randPoor];
         }
-
-
-
+        
         GameObject building = GameObject.Instantiate(buildingPrefab);
         GameObject fence = GameObject.Instantiate(fencePrefab);
-
-
+        
         if (buildings.Count == 0)
         {
-            building.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, 60, -1000), building.transform.rotation);
+            building.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width + (buildingTex.width * building.transform.localScale.x / 2), 155, -1000), building.transform.rotation);
         }
-
         else
         {
             GameObject lastTile = buildings[buildings.Count - 1];
-            building.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (building1Texture.width * building.transform.localScale.x), 60, -1000), building.transform.rotation);
+            int lastWidth = buildingWidths[buildingWidths.Count - 1];
+            building.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (lastWidth / 2 * building.transform.localScale.x) + (buildingTex.width / 2 * building.transform.localScale.x), 155, -1000), building.transform.rotation);
         }
-
-
+        
         buildings.Add(building);
+        buildingWidths.Add(buildingTex.width);
 
-        fence.transform.SetPositionAndRotation(PixelToGame(GameToPixel(building.transform.position.x, 0, 0).x + (building1Texture.width * fence.transform.localScale.x), 60, -1000), fence.transform.rotation);
+
+        Vector3 fencePos = PixelToGame(GameToPixel(building.transform.position.x, 0, 0).x + (buildingTex.width / 2 * building.transform.localScale.x) + (fenceTex.width / 2 * fence.transform.localScale.x), 85 + (fenceTex.height / 2 * fence.transform.localScale.y), fence.transform.position.z);
+
+        fence.transform.SetPositionAndRotation(fencePos, fence.transform.rotation);
+        buildingWidths.Add(fenceTex.width);
 
         int randGoat = Random.Range(0, 10);
-        Debug.Log("goat - " + randGoat);
         if (randGoat <= 1)
         {
             GameObject goat = GameObject.Instantiate(Managers.GetInstance().GetGameProperties().GoatPrefab);
-            goat.transform.SetPositionAndRotation(PixelToGame(GameToPixel(building.transform.position.x, 0, 0).x + (building1Texture.width * fence.transform.localScale.x), 80, -2), fence.transform.rotation);
+            goat.transform.SetPositionAndRotation(PixelToGame(GameToPixel(fencePos.x, 0, 0).x, 163, 20), fence.transform.rotation);
         }
-
 
         buildings.Add(fence);
     }
@@ -136,10 +147,10 @@ public class StageManager : MonoBehaviour {
         GameObject ground = GameObject.Instantiate(groundPrefab);
 
         if (grounds.Count == 0) {
-            ground.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, -125, ground.transform.position.y), ground.transform.rotation);
+            ground.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, -75, ground.transform.position.y), ground.transform.rotation);
         } else {
             GameObject lastGround = grounds[grounds.Count - 1];
-            ground.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastGround.transform.position.x, 0, 0).x + (groundTexture.width * ground.transform.localScale.x), -125, ground.transform.position.y), ground.transform.rotation);
+            ground.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastGround.transform.position.x, 0, 0).x + (groundTexture.width * ground.transform.localScale.x), -75, ground.transform.position.y), ground.transform.rotation);
         }
 
         grounds.Add(ground);
@@ -187,16 +198,28 @@ public class StageManager : MonoBehaviour {
         pothole2Texture = Resources.Load("background/bg_0000_pothole2") as Texture2D;
         pothole1Texture = Resources.Load("background/bg_0001_pothole1") as Texture2D;
         groundTexture = Resources.Load("background/bg_0002_ground") as Texture2D;
-        building1Texture = Resources.Load("background/bg_0000_Daniel’s-Board-game-Emporium") as Texture2D;
         backBuildingTexture = Resources.Load("background/bg_0004_buildings_tower") as Texture2D;
+        
+        poorBuildingTextures.Add(Resources.Load("background/bg_0001_rundown") as Texture2D);
+        poorBuildingTextures.Add(Resources.Load("background/bg_0000_randobuilding") as Texture2D);
+        
+        richBuildingTextures.Add(Resources.Load("background/bg_0003_Allie-James-Diner") as Texture2D);
+        richBuildingTextures.Add(Resources.Load("background/bg_0002_bookstore") as Texture2D);
+        richBuildingTextures.Add(Resources.Load("background/bg_0001_Coffee-with-Charles") as Texture2D);
+        richBuildingTextures.Add(Resources.Load("background/bg_0000_Daniel’s-Board-game-Emporium") as Texture2D);
+        richBuildingTextures.Add(Resources.Load("background/bg_0002_johns-cats") as Texture2D);
+
+        fenceTextures.Add(Resources.Load("background/bg_0002_fence1") as Texture2D);
+        fenceTextures.Add(Resources.Load("background/bg_0001_fence2") as Texture2D);
+        poorfenceTexture = Resources.Load("background/bg_0000_fence3") as Texture2D;
 
         pothole2Sprite = Sprite.Create(pothole2Texture, new Rect(0, 0, pothole2Texture.width, pothole2Texture.height), new Vector2(0f, 0.5f), 100);
         pothole1Sprite = Sprite.Create(pothole1Texture, new Rect(0, 0, pothole1Texture.width, pothole1Texture.height), new Vector2(0f, 0.5f), 100);
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             addNewGround();
         }
-
+        
         for (int i = 0; i < 5; i++)
         {
             addNewBuilding();
@@ -262,9 +285,12 @@ public class StageManager : MonoBehaviour {
             GameObject obj = buildings[0];
             if (isOutOfBounds(obj))
             {
+                GameObject obj2 = buildings[1];
                 GameObject.Destroy(obj);
                 buildings.Remove(obj);
-                
+                GameObject.Destroy(obj2);
+                buildings.Remove(obj2);
+
                 addNewBuilding();
             }
         }
