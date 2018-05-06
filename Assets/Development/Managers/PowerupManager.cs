@@ -41,10 +41,10 @@ public class PowerupManager : MonoBehaviour {
             PU = Managers.GetInstance().GetGameProperties().SmallHealthPrefab;
         } else if (randVal <= 8)
         {
-            PU = Managers.GetInstance().GetGameProperties().BigHealthPrefab;
+            PU = Managers.GetInstance().GetGameProperties().RaccoonItemPrefab;
         } else
         {
-            PU = Managers.GetInstance().GetGameProperties().RaccoonItemPrefab;
+            PU = Managers.GetInstance().GetGameProperties().BigHealthPrefab;
         }
 
         GameObject powerup = GameObject.Instantiate(PU);

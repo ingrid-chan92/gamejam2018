@@ -23,6 +23,8 @@ public class StageManager : MonoBehaviour {
 
     public float potholeChance = 0.2f;
 
+    private bool arrowCanBeShown = true;
+
     private int buildingsPast = 0;
 
     private bool complete = true;
@@ -30,6 +32,9 @@ public class StageManager : MonoBehaviour {
     private int stream = 0;
     private int currentScene = 0;
     private bool bossSpawned = false;
+
+    private GameObject arrow;
+    private GameObject AR;
 
     private int bossScene = 5;
 
@@ -203,6 +208,9 @@ public class StageManager : MonoBehaviour {
     void Start () {
         camera = Camera.main;
 
+        AR = Managers.GetInstance().GetGameProperties().Arrow;
+        arrow = GameObject.Instantiate(AR);
+
         musicPrefab = Managers.GetInstance().GetGameProperties().LevelMusic;
         music = GameObject.Instantiate(musicPrefab);
 
@@ -253,6 +261,7 @@ public class StageManager : MonoBehaviour {
     {
         if (!complete && currentScene < bossScene && waves > 0)
         {
+            arrowCanBeShown = true;
             spawnTimer -= Time.deltaTime;
 
             if (spawnTimer <= 0.0f && stream > 0)
@@ -293,11 +302,24 @@ public class StageManager : MonoBehaviour {
         {
             complete = true;
             spawnTimer = 0.0f;
+
             waves = 0;
             stream = 0;
+
+            if (arrowCanBeShown == true)
+            {
+                arrow.SetActive(true);
+            }
         }
 
         Vector3 cameraDiff = camera.transform.position - cameraPreviousPosition;
+
+        if (cameraDiff.x > 0)
+        {
+            arrow.SetActive(false);
+            arrowCanBeShown = false;
+        }
+
         foreach (GameObject backBuilding in backBuildings)
         {
             backBuilding.transform.Translate(cameraDiff / 2);

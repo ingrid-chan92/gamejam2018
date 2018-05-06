@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
     public int startHealth = 100;
     public int punchDamage = 10;
     public float iFrameTime = 1.0f;
+    public float attackIntervalSeconds = 0.75f;
+    private float timeSinceAttack;
     private int currentHealth;
     private Camera camera;
     private PlayerStates state = PlayerStates.idle;
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour {
         healthBar = GameObject.Instantiate(HP);
         Text hpText = healthBar.GetComponentInChildren<Text>();
         hpText.text = currentHealth.ToString();
+        this.timeSinceAttack = attackIntervalSeconds;
 
         RC = Managers.GetInstance().GetGameProperties().RaccoonBar;
         raccoonBar = GameObject.Instantiate(RC);
@@ -125,6 +128,11 @@ public class PlayerController : MonoBehaviour {
             this.remainingIFrameTime -= Time.deltaTime;
         }
 
+        if (timeSinceAttack < attackIntervalSeconds)
+        {
+            timeSinceAttack += Time.deltaTime;
+        }
+
         Vector3 walkVector = Vector3.zero;
 
         if (state == PlayerStates.dead || state == PlayerStates.dying)
@@ -135,9 +143,6 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.J)) {
-            this.die();
-        }
         Camera cam = Camera.main;
         float camX = cam.transform.position.x;
         float maxL = camX - 3f;
@@ -175,6 +180,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     void attack() {
+        if (timeSinceAttack < attackIntervalSeconds)
+        {
+            return;
+        }
+        timeSinceAttack = 0f;
+
         animator.SetTrigger("punch");
         Collider2D[] results = new Collider2D[20];
 
@@ -182,7 +193,6 @@ public class PlayerController : MonoBehaviour {
         filter.layerMask = enemiesMask;
         filter.useLayerMask = true;
         int resultCount = hurtbox.OverlapCollider(filter, results);
-        Debug.Log("Attack contacting " + resultCount + " other things");
 
         for (int i = 0; i < resultCount; i++) {
             HipsterController enemy;
@@ -197,7 +207,7 @@ public class PlayerController : MonoBehaviour {
             return;
         }
         this.numRaccoons--;
-
+        
         animator.SetTrigger("throwing");
         GameObject raccoonPrefab = Managers.GetInstance().GetGameProperties().RaccoonPrefab;
 
