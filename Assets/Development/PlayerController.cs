@@ -144,6 +144,7 @@ public class PlayerController : MonoBehaviour {
 
         RaccoonController cntrl = raccoon.GetComponent<RaccoonController>();
         cntrl.SetVelocity(initialVelocity);
+        cntrl.SetShadowY(transform.position.y - 0.25f);
     }
 
     void walk(Vector3 walkVector) {

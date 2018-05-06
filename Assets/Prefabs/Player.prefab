@@ -149,6 +149,7 @@ MonoBehaviour:
   ySpeedMult: 0.8
   startHealth: 100
   punchDamage: 10
+  iFrameTime: 1
 --- !u!212 &212214722086688104
 SpriteRenderer:
   m_ObjectHideFlags: 1

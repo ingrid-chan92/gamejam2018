@@ -20,6 +20,8 @@ public class RaccoonController : MonoBehaviour {
     public int biteDamage = 1;
     public float biteIntervalSeconds = 1.0f;
     private float timeSinceBite;
+    private Transform dropShadowTransform;
+    private float shadowBaseY = -20;
 
     // Use this for initialization
     void Start () {
@@ -29,10 +31,16 @@ public class RaccoonController : MonoBehaviour {
         curState = racState.Launched;
         animator = this.GetComponentInChildren<Animator>();
         this.timeSinceBite = biteIntervalSeconds;
+        this.dropShadowTransform = transform.Find("dropShadow");
     }
 
     public void SetVelocity(Vector3 newVelocity) {
         this.velocity = newVelocity;
+    }
+
+    public void SetShadowY(float y)
+    {
+        this.shadowBaseY = y;
     }
 	
 	// Update is called once per frame
@@ -46,8 +54,22 @@ public class RaccoonController : MonoBehaviour {
             // Move due to velocity
             transform.position += (velocity * Time.deltaTime);
         }
+
+        if (curState == racState.Launched)
+        {
+            if (shadowBaseY > -20)
+            {
+                Vector3 shadPos = dropShadowTransform.position;
+                dropShadowTransform.position = new Vector3(shadPos.x, shadowBaseY, shadPos.z);
+                if (transform.position.y < shadowBaseY)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
+            }
+        }
         
-        if (transform.position.y < -10)
+        if (transform.position.y < -5)
         {
             Destroy(gameObject);
         }
@@ -122,6 +144,7 @@ public class RaccoonController : MonoBehaviour {
         }
 
         curState = racState.Latched;
+        dropShadowTransform.position = dropShadowTransform.position + Vector3.down * 50;
         attachedHipster = hitHipster;
         animator.SetBool("biting", true);
     }
