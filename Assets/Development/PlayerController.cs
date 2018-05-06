@@ -71,17 +71,22 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.J)) {
             this.die();
         }
+        Camera cam = Camera.main;
+        float camX = cam.transform.position.x;
+        float maxL = camX - 3f;
+        float maxR = camX + 3f;
 
-        if (Input.GetKey(KeyCode.A)) {
+
+        if (Input.GetKey(KeyCode.A) && transform.position.x >= maxL) {
             walkVector += Vector3.left;
         }
-        if (Input.GetKey(KeyCode.D)) {
+        if (Input.GetKey(KeyCode.D) && transform.position.x <= maxR) {
             walkVector += Vector3.right;
         }
-        if (Input.GetKey(KeyCode.W)) {
+        if (Input.GetKey(KeyCode.W) && transform.position.y <= 0.75) {
             walkVector += (Vector3.up * ySpeedMult);
         }
-        if (Input.GetKey(KeyCode.S)) {
+        if (Input.GetKey(KeyCode.S) && transform.position.y >= -2) {
             walkVector += (Vector3.down * ySpeedMult);
         }
 
@@ -168,5 +173,10 @@ public class PlayerController : MonoBehaviour {
         if(transform.position.x > camera.transform.position.x && !Managers.GetInstance().GetStageManager().ActiveScene()) {
             camera.transform.Translate(step * Vector3.right);
         }
+    }
+
+    public void BossMusic ()
+    {
+
     }
 }
