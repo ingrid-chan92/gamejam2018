@@ -13,5 +13,5 @@ public class Constants : MonoBehaviour {
         GS_05_MENURELOAD
     }
 
-    public const float gravity = 2.5f;
+    public const float gravity = 3.0f;
 }

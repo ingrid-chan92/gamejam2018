@@ -10,15 +10,18 @@ public class RaccoonController : MonoBehaviour {
     private enum racState
     {
         Launched,
-        Latched
+        Latched,
+        EnemyDead
     }
     private racState curState;
     private HipsterController attachedHipster;
-    private Vector3 headOffset = new Vector3(0, 0.5f, 5);
+    private Vector3 headOffset = new Vector3(0, 0.25f, 5);
     private Animator animator;
     public int biteDamage = 1;
     public float biteIntervalSeconds = 1.0f;
     private float timeSinceBite;
+    private Transform dropShadowTransform;
+    private float shadowBaseY = -20;
 
     // Use this for initialization
     void Start () {
@@ -28,22 +31,45 @@ public class RaccoonController : MonoBehaviour {
         curState = racState.Launched;
         animator = this.GetComponentInChildren<Animator>();
         this.timeSinceBite = biteIntervalSeconds;
+        this.dropShadowTransform = transform.Find("dropShadow");
     }
 
     public void SetVelocity(Vector3 newVelocity) {
         this.velocity = newVelocity;
     }
+
+    public void SetShadowY(float y)
+    {
+        this.shadowBaseY = y;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        // Accelerate due to gravity
-        Vector3 deltaV = Vector3.down * Time.deltaTime * Constants.gravity;
-        velocity += deltaV;
+        if (curState != racState.Latched)
+        {
+            // Accelerate due to gravity
+            Vector3 deltaV = Vector3.down * Time.deltaTime * Constants.gravity;
+            velocity += deltaV;
 
-        // Move due to velocity
-        transform.position += (velocity * Time.deltaTime);
+            // Move due to velocity
+            transform.position += (velocity * Time.deltaTime);
+        }
 
-        if (transform.position.y < -10)
+        if (curState == racState.Launched)
+        {
+            if (shadowBaseY > -20)
+            {
+                Vector3 shadPos = dropShadowTransform.position;
+                dropShadowTransform.position = new Vector3(shadPos.x, shadowBaseY, shadPos.z);
+                if (transform.position.y < shadowBaseY)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
+            }
+        }
+        
+        if (transform.position.y < -5)
         {
             Destroy(gameObject);
         }
@@ -59,10 +85,14 @@ public class RaccoonController : MonoBehaviour {
         }
     }
 
+
+
     void bite()
     {
         if (attachedHipster == null)
         {
+            curState = racState.EnemyDead;
+            velocity = Vector3.zero;
             return;
         }
 
@@ -83,7 +113,7 @@ public class RaccoonController : MonoBehaviour {
         filter.layerMask = enemiesMask;
         filter.useLayerMask = true;
         int resultCount = hitbox.OverlapCollider(filter, results);
-        Debug.Log("Attack contacting " + resultCount + " other things");
+        //Debug.Log("Attack contacting " + resultCount + " other things");
 
         for (int i = 0; i < resultCount; i++)
         {
@@ -105,7 +135,7 @@ public class RaccoonController : MonoBehaviour {
         {
             return;
         }
-        Debug.Log("raccoon contacting " + resultCount + " other things");
+       // Debug.Log("raccoon contacting " + resultCount + " other things");
 
         Collider2D hitEnemyCollider = results[0];
         HipsterController hitHipster = hitEnemyCollider.GetComponentInParent<HipsterController>();
@@ -116,6 +146,7 @@ public class RaccoonController : MonoBehaviour {
         }
 
         curState = racState.Latched;
+        dropShadowTransform.position = dropShadowTransform.position + Vector3.down * 50;
         attachedHipster = hitHipster;
         animator.SetBool("biting", true);
     }

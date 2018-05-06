@@ -65,6 +65,7 @@ MonoBehaviour:
   RaccoonItemPrefab: {fileID: 1718577629306516, guid: 872bad60d9353fd46b287cb10b2f1265,
     type: 2}
   GoatPrefab: {fileID: 1584025433298570, guid: f2d45c2ff810fbf49be3b9bdf9e1ca01, type: 2}
+  FloatText: {fileID: 1554955883779690, guid: 92651dbc0fe61324c812a35f92e09a8b, type: 2}
   MenuPrefab: {fileID: 1746336412194282, guid: 5802c4ca28df65341a77725aae811c87, type: 2}
   GameOverPrefab: {fileID: 1040568764427786, guid: 249a670dacefa1e4e93a416fba636c80,
     type: 2}
