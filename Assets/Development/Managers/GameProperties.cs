@@ -21,6 +21,7 @@ public class GameProperties : MonoBehaviour {
     public GameObject WinPrefab;
     public GameObject LevelMusic;
     public GameObject BossMusic;
+    public GameObject HealthBar;
 
     // Buildings
     public GameObject PoorFence;
