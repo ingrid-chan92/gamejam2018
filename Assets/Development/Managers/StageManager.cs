@@ -23,9 +23,11 @@ public class StageManager : MonoBehaviour {
     private bool complete = true;
     private int waves = 0;
     private int currentScene = 0;
+    private int bossScene = 3;
 
     private GameObject groundPrefab;
-    private GameObject danielsPrefab;
+    private GameObject buildingPrefab;
+    private GameObject fencePrefab;
     private GameObject backBuildingPrefab;
 
     private List<GameObject> grounds = new List<GameObject>();
@@ -79,19 +81,42 @@ public class StageManager : MonoBehaviour {
 
     void addNewBuilding()
     {
-        GameObject daniels = GameObject.Instantiate(danielsPrefab);
+        int randPoor = Random.Range(0, 2);
+        int randRich = Random.Range(0, 5);
+        int randSetting = Random.Range(1, bossScene+1);
+
+        if (randSetting <= currentScene)
+        {
+            buildingPrefab = Managers.GetInstance().GetGameProperties().GentrifiedBuildings[randRich];
+            fencePrefab = Managers.GetInstance().GetGameProperties().RichFence[randPoor];
+        } else
+        {
+            buildingPrefab = Managers.GetInstance().GetGameProperties().PoorBuildings[randPoor];
+            fencePrefab = Managers.GetInstance().GetGameProperties().PoorFence;
+        }
+
+
+
+        GameObject building = GameObject.Instantiate(buildingPrefab);
+        GameObject fence = GameObject.Instantiate(fencePrefab);
+
 
         if (buildings.Count == 0)
         {
-            daniels.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, 60, -1000), daniels.transform.rotation);
+            building.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, 60, -1000), building.transform.rotation);
         }
+
         else
         {
             GameObject lastTile = buildings[buildings.Count - 1];
-            daniels.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (building1Texture.width * daniels.transform.localScale.x), 60, -1000), daniels.transform.rotation);
+            building.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (building1Texture.width * building.transform.localScale.x), 60, -1000), building.transform.rotation);
         }
 
-        buildings.Add(daniels);
+
+        buildings.Add(building);
+
+        fence.transform.SetPositionAndRotation(PixelToGame(GameToPixel(building.transform.position.x, 0, 0).x + (building1Texture.width * fence.transform.localScale.x), 60, -1000), fence.transform.rotation);
+        buildings.Add(fence);
     }
 
     void addNewGround()
@@ -146,7 +171,7 @@ public class StageManager : MonoBehaviour {
         camera = Camera.main;
 
         groundPrefab = Managers.GetInstance().GetGameProperties().GroundPrefab;
-        danielsPrefab = Managers.GetInstance().GetGameProperties().DanielsPrefab;
+
         backBuildingPrefab = Managers.GetInstance().GetGameProperties().BackBuildingsPrefab;
 
         pothole2Texture = Resources.Load("background/bg_0000_pothole2") as Texture2D;

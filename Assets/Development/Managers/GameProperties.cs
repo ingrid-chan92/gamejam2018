@@ -9,9 +9,16 @@ public class GameProperties : MonoBehaviour {
     public GameObject Hipster2Prefab;
     public GameObject BossPrefab;
     public GameObject GroundPrefab;
-    public GameObject DanielsPrefab;
     public GameObject BackBuildingsPrefab;
     public GameObject SmallHealthPrefab;
     public GameObject BigHealthPrefab;
     public GameObject RaccoonItemPrefab;
+
+    // Buildings
+    public GameObject PoorFence;
+    public GameObject[] PoorBuildings;
+    public GameObject[] GentrifiedBuildings;
+    public GameObject[] RichFence;
 }
+
+
