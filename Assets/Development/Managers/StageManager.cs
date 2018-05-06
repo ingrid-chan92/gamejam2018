@@ -17,7 +17,8 @@ public class StageManager : MonoBehaviour {
     private Camera camera;
     private Vector3 cameraPreviousPosition;
 
-    public float spawnTime = 5.0f;
+    public float spawnTime = 1.0f;
+    private float spawnTime2 = 5.0f;
     private float spawnTimer = 0.0f;
 
     public float potholeChance = 0.2f;
@@ -26,6 +27,7 @@ public class StageManager : MonoBehaviour {
 
     private bool complete = true;
     private int waves = 0;
+    private int stream = 0;
     private int currentScene = 0;
     private bool bossSpawned = false;
 
@@ -189,7 +191,12 @@ public class StageManager : MonoBehaviour {
     void newScene(int waves)
     {
         complete = false;
-        this.waves = waves;
+
+        this.waves = (waves / 2) + 1;
+        stream = (waves % this.waves) + 1;
+
+        Debug.Log(stream);
+        Debug.Log(this.waves);
     }
 
     // Use this for initialization
@@ -248,13 +255,22 @@ public class StageManager : MonoBehaviour {
         {
             spawnTimer -= Time.deltaTime;
 
-            if (spawnTimer <= 0.0f)
+            if (spawnTimer <= 0.0f && stream > 0)
             {
                 spawnTimer = spawnTime;
 
-                spawnNPCs(currentScene + 1);
+                spawnNPCs(1);
+                stream -= 1;
+            }
+            else if (spawnTimer <= 0.0f)
+            {
                 waves -= 1;
-            } 
+                if (waves > 0)
+                {
+                    spawnTimer = spawnTime2;
+                    stream = (currentScene % ((currentScene / 2) + 1)) + 1;
+                }
+            }
         } else if (currentScene == bossScene && !bossSpawned)
         {
             bossSpawned = true;
@@ -268,15 +284,17 @@ public class StageManager : MonoBehaviour {
 
             if (spawnTimer <= 0.0f)
             {
-                spawnTimer = spawnTime / 2;
+                spawnTimer = spawnTime * 4;
                 spawnNPCs(1);
             }
         }
 
-        if (Managers.GetInstance().GetNPCManager().allEnemiesDead() && waves <= 0)
+        if (Managers.GetInstance().GetNPCManager().allEnemiesDead() && waves <= 0 && stream <= 0)
         {
             complete = true;
             spawnTimer = 0.0f;
+            waves = 0;
+            stream = 0;
         }
 
         Vector3 cameraDiff = camera.transform.position - cameraPreviousPosition;
