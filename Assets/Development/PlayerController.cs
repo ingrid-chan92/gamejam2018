@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     private Animator animator;
     private Collider2D hurtbox;
     private Vector3 initScale;
+    private LayerMask enemiesMask;
 
     private enum PlayerStates {
         stopped,
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour {
         animator = this.GetComponentInChildren<Animator>();
         hurtbox = this.GetComponentInChildren<CircleCollider2D>();
         this.initScale = transform.localScale;
+        enemiesMask = ~((1 << 8) | (1 << 9));
     }
 
     void die() {
@@ -97,7 +99,10 @@ public class PlayerController : MonoBehaviour {
     void attack() {
         animator.SetTrigger("punch");
         Collider2D[] results = new Collider2D[20];
+
         ContactFilter2D filter = new ContactFilter2D();
+        filter.layerMask = enemiesMask;
+        filter.useLayerMask = true;
         int resultCount = hurtbox.OverlapCollider(filter, results);
         Debug.Log("Attack contacting " + resultCount + " other things");
 

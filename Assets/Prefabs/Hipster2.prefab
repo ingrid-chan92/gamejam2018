@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4279600251451580}
   - component: {fileID: 114378837087268028}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hipster2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4697140501182124}
   - component: {fileID: 61082004456877374}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4587490262985994}
   - component: {fileID: 212741498298500434}
   - component: {fileID: 95307148676114964}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: enemy1_walk_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
