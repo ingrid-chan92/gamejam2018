@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
         }
         if (this.remainingIFrameTime > 0 && amount > 0)
         {
-            Debug.Log("player is invincible right now, for " + remainingIFrameTime + " more seconds");
+            //Debug.Log("player is invincible right now, for " + remainingIFrameTime + " more seconds");
             return;
         }
         if (amount > 0)
