@@ -15,6 +15,7 @@ public class StageManager : MonoBehaviour {
     private Sprite pothole1Sprite;
 
     private Camera camera;
+    private Vector3 cameraPreviousPosition;
 
     public float spawnTime = 5.0f;
     private float spawnTimer = 0.0f;
@@ -78,12 +79,12 @@ public class StageManager : MonoBehaviour {
 
         if (backBuildings.Count == 0)
         {
-            backBuilding.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, 180, 1000), backBuilding.transform.rotation);
+            backBuilding.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, 190, 1000), backBuilding.transform.rotation);
         }
         else
         {
             GameObject lastTile = backBuildings[backBuildings.Count - 1];
-            backBuilding.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (backBuildingTexture.width * backBuilding.transform.localScale.x), 180, 1000), backBuilding.transform.rotation);
+            backBuilding.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (backBuildingTexture.width * backBuilding.transform.localScale.x), 190, 1000), backBuilding.transform.rotation);
         }
 
         backBuildings.Add(backBuilding);
@@ -196,7 +197,7 @@ public class StageManager : MonoBehaviour {
         musicPrefab = Managers.GetInstance().GetGameProperties().LevelMusic;
         music = GameObject.Instantiate(musicPrefab);
 
-
+        cameraPreviousPosition = camera.transform.position;
 
         groundPrefab = Managers.GetInstance().GetGameProperties().GroundPrefab;
 
@@ -275,6 +276,13 @@ public class StageManager : MonoBehaviour {
             complete = true;
             spawnTimer = 0.0f;
         }
+
+        Vector3 cameraDiff = camera.transform.position - cameraPreviousPosition;
+        foreach (GameObject backBuilding in backBuildings)
+        {
+            backBuilding.transform.Translate(cameraDiff / 2);
+        }
+        cameraPreviousPosition = camera.transform.position;
 
         if (grounds.Count > 0)
         {
