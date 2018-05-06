@@ -71,6 +71,7 @@ MonoBehaviour:
   WinPrefab: {fileID: 1310489255839152, guid: 7362ca00bc9fe2a43bd23df9aea230b1, type: 2}
   LevelMusic: {fileID: 1353207390498154, guid: 9705af5f0b5c6e94daf46806effc4466, type: 2}
   BossMusic: {fileID: 1183359010585050, guid: f8cb6f15da9c0e949a407ef4515e6368, type: 2}
+  HealthBar: {fileID: 1132846375331636, guid: 70dcfefcb4ef4da4a92f6b796c86df85, type: 2}
   PoorFence: {fileID: 1237875904335572, guid: 83a29ea5609db9b408e4a1281c5e42af, type: 2}
   PoorBuildings:
   - {fileID: 1326161160107244, guid: d1615ad81e8352b4698254b82335a8b4, type: 2}

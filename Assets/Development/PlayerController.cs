@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour {
     private Collider2D hurtbox;
     private Vector3 initScale;
     private LayerMask enemiesMask;
+    private GameObject HP;
+    private GameObject healthBar;
 
     private enum PlayerStates {
         stopped,
@@ -35,6 +38,11 @@ public class PlayerController : MonoBehaviour {
         hurtbox = this.GetComponentInChildren<CircleCollider2D>();
         this.initScale = transform.localScale;
         enemiesMask = ~((1 << 8) | (1 << 9));
+
+        HP = Managers.GetInstance().GetGameProperties().HealthBar;
+        healthBar = GameObject.Instantiate(HP);
+        Text hpText = healthBar.GetComponentInChildren<Text>();
+        hpText.text = currentHealth.ToString();
     }
 
     void die() {
@@ -46,7 +54,15 @@ public class PlayerController : MonoBehaviour {
         if (this.currentHealth < 0) {
             return;
         }
+        
         this.currentHealth -= amount;
+
+        Text hpText = healthBar.GetComponentInChildren<Text>();
+        string healthString = currentHealth.ToString();
+        if (currentHealth < 0) {
+            healthString = "0";
+        }
+        hpText.text = currentHealth.ToString();
 
         if (this.currentHealth > this.startHealth) {
             this.currentHealth = this.startHealth;
