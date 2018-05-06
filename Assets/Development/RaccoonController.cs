@@ -85,6 +85,8 @@ public class RaccoonController : MonoBehaviour {
         }
     }
 
+
+
     void bite()
     {
         if (attachedHipster == null)
@@ -111,7 +113,7 @@ public class RaccoonController : MonoBehaviour {
         filter.layerMask = enemiesMask;
         filter.useLayerMask = true;
         int resultCount = hitbox.OverlapCollider(filter, results);
-        Debug.Log("Attack contacting " + resultCount + " other things");
+        //Debug.Log("Attack contacting " + resultCount + " other things");
 
         for (int i = 0; i < resultCount; i++)
         {
@@ -133,7 +135,7 @@ public class RaccoonController : MonoBehaviour {
         {
             return;
         }
-        Debug.Log("raccoon contacting " + resultCount + " other things");
+       // Debug.Log("raccoon contacting " + resultCount + " other things");
 
         Collider2D hitEnemyCollider = results[0];
         HipsterController hitHipster = hitEnemyCollider.GetComponentInParent<HipsterController>();

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
     private Vector3 initScale;
     private LayerMask enemiesMask;
     private float remainingIFrameTime = 0f;
+    public int numRaccoons = 0;
 
     private enum PlayerStates {
         stopped,
@@ -49,12 +50,15 @@ public class PlayerController : MonoBehaviour {
         if (this.currentHealth < 0) {
             return;
         }
-        if (this.remainingIFrameTime > 0)
+        if (this.remainingIFrameTime > 0 && amount > 0)
         {
-            this.remainingIFrameTime -= Time.deltaTime;
+            Debug.Log("player is invincible right now, for " + remainingIFrameTime + " more seconds");
             return;
         }
-        this.remainingIFrameTime = iFrameTime;
+        if (amount > 0)
+        {
+            this.remainingIFrameTime = iFrameTime;
+        }
 
         GameObject damageTextPrefab = Managers.GetInstance().GetGameProperties().FloatText;
 
@@ -68,8 +72,8 @@ public class PlayerController : MonoBehaviour {
         }
         if (amount < 0)
         {
-            cntrl.setText("++" + amount.ToString());
-            cntrl.setColor(Color.blue);
+            cntrl.setText("++" + (amount * -1).ToString());
+            cntrl.setColor(Color.cyan);
         }
         
 
@@ -86,6 +90,12 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        if (this.remainingIFrameTime > 0)
+        {
+            this.remainingIFrameTime -= Time.deltaTime;
+        }
+
         Vector3 walkVector = Vector3.zero;
 
         if (Input.GetKeyDown(KeyCode.J)) {
@@ -140,6 +150,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     void throwRaccoon() {
+        if (this.numRaccoons <= 0)
+        {
+            return;
+        }
+        this.numRaccoons--;
+
         animator.SetTrigger("throwing");
         GameObject raccoonPrefab = Managers.GetInstance().GetGameProperties().RaccoonPrefab;
 

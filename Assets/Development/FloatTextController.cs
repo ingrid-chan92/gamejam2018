@@ -30,7 +30,6 @@ public class FloatTextController : MonoBehaviour {
 
     public void setText (string text)
     {
-        Debug.Log("setting text to " + text);
         this.text = text;
     }
 

@@ -120,7 +120,7 @@ public class StageManager : MonoBehaviour {
         fence.transform.SetPositionAndRotation(PixelToGame(GameToPixel(building.transform.position.x, 0, 0).x + (building1Texture.width * fence.transform.localScale.x), 60, -1000), fence.transform.rotation);
 
         int randGoat = Random.Range(0, 10);
-        Debug.Log("goat - " + randGoat);
+        //Debug.Log("goat - " + randGoat);
         if (randGoat <= 1)
         {
             GameObject goat = GameObject.Instantiate(Managers.GetInstance().GetGameProperties().GoatPrefab);
