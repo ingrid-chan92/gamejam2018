@@ -39,7 +39,7 @@ public class PowerupManager : MonoBehaviour {
         if (randVal < 6)
         {
             PU = Managers.GetInstance().GetGameProperties().SmallHealthPrefab;
-        } else if (randVal < 8)
+        } else if (randVal <= 8)
         {
             PU = Managers.GetInstance().GetGameProperties().BigHealthPrefab;
         } else

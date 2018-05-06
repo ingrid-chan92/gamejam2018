@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour {
     public int numRaccoons = 0;
     private GameObject HP;
     private GameObject healthBar;
+    private GameObject raccoonBar;
+    private GameObject RC;
 
     private enum PlayerStates {
         stopped,
@@ -46,6 +48,11 @@ public class PlayerController : MonoBehaviour {
         healthBar = GameObject.Instantiate(HP);
         Text hpText = healthBar.GetComponentInChildren<Text>();
         hpText.text = currentHealth.ToString();
+
+        RC = Managers.GetInstance().GetGameProperties().RaccoonBar;
+        raccoonBar = GameObject.Instantiate(RC);
+        Text raccoonText = raccoonBar.GetComponentInChildren<Text>();
+        raccoonText.text = numRaccoons.ToString();
     }
 
     void die() {
@@ -89,6 +96,8 @@ public class PlayerController : MonoBehaviour {
         string healthString = currentHealth.ToString();
         if (currentHealth < 0) {
             healthString = "0";
+        } else if (currentHealth >= startHealth) {
+            healthString = startHealth.ToString();
         }
         hpText.text = healthString;
 
@@ -102,6 +111,14 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        Text raccoonText = raccoonBar.GetComponentInChildren<Text>();
+        string raccoonString = numRaccoons.ToString();
+        if (numRaccoons < 0)
+        {
+            raccoonString = "0";
+        }
+        raccoonText.text = raccoonString;
 
         if (this.remainingIFrameTime > 0)
         {
