@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     private int currentHealth;
     private Camera camera;
     private PlayerStates state = PlayerStates.idle;
+    private float deadTime = 3f;
 
     private enum PlayerStates {
         stopped,
@@ -28,14 +29,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     void die() {
-        //Debug.Log("The player has been killed because they are bad at video games");
         state = PlayerStates.dying;
-        //Debug.Log("I am slain");
     }
 
     public void damage(int amount) {
         this.currentHealth -= amount;
-        //Debug.Log("Damaging player by " + amount + " units");
         Debug.Log("Current Health = " + currentHealth);
         if (this.currentHealth < 0) {
             this.die();
@@ -45,6 +43,14 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         Vector3 walkVector = Vector3.zero;
+
+        if (state == PlayerStates.dead || state == PlayerStates.dying)
+        {
+            deadTime -= Time.deltaTime;
+            if (deadTime <= 0) {
+                Application.LoadLevel("GameOver");
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.J)) {
             this.die();

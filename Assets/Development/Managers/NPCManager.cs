@@ -34,6 +34,9 @@ public class NPCManager : MonoBehaviour {
                 deathSpot.z = -10f;
                 Managers.GetInstance().GetPowerupManager().SpawnPowerup(deathSpot);
             }
+            if (destroyNPC.strength > 10) {
+                Application.LoadLevel("WinScene");
+            }
             m_hipster.Remove(destroyNPC);
         }
     }

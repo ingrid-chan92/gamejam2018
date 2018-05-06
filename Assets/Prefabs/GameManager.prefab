@@ -63,6 +63,10 @@ MonoBehaviour:
   RaccoonItemPrefab: {fileID: 1718577629306516, guid: 872bad60d9353fd46b287cb10b2f1265,
     type: 2}
   GoatPrefab: {fileID: 1584025433298570, guid: f2d45c2ff810fbf49be3b9bdf9e1ca01, type: 2}
+  MenuPrefab: {fileID: 1746336412194282, guid: 5802c4ca28df65341a77725aae811c87, type: 2}
+  GameOverPrefab: {fileID: 1040568764427786, guid: 249a670dacefa1e4e93a416fba636c80,
+    type: 2}
+  WinPrefab: {fileID: 1310489255839152, guid: 7362ca00bc9fe2a43bd23df9aea230b1, type: 2}
   PoorFence: {fileID: 1237875904335572, guid: 83a29ea5609db9b408e4a1281c5e42af, type: 2}
   PoorBuildings:
   - {fileID: 1326161160107244, guid: d1615ad81e8352b4698254b82335a8b4, type: 2}

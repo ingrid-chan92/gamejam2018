@@ -62,7 +62,6 @@ public class HipsterController : MonoBehaviour {
 
         if (hasBox)
         {
-            Debug.Log(chatBoxTimer);
             chatBoxTimer -= Time.deltaTime;
             if (chatBoxTimer <= 0)
             {

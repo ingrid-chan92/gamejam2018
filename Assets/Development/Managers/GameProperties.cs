@@ -14,6 +14,9 @@ public class GameProperties : MonoBehaviour {
     public GameObject BigHealthPrefab;
     public GameObject RaccoonItemPrefab;
     public GameObject GoatPrefab;
+    public GameObject MenuPrefab;
+    public GameObject GameOverPrefab;
+    public GameObject WinPrefab;
 
     // Buildings
     public GameObject PoorFence;

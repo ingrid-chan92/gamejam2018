@@ -6,7 +6,7 @@ public class GameStart : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		DontDestroyOnLoad (this);
+		//DontDestroyOnLoad (this);
 		gameObject.AddComponent<Managers>();
 	}
 }
