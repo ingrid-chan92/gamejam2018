@@ -23,6 +23,8 @@ public class StageManager : MonoBehaviour {
     private bool complete = true;
     private int waves = 0;
     private int currentScene = 0;
+    private bool bossSpawned = false;
+
     private int bossScene = 3;
 
     private GameObject groundPrefab;
@@ -146,9 +148,9 @@ public class StageManager : MonoBehaviour {
         }
     }
 
-    void spawnNPCs()
+    void spawnNPCs(int count)
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < count; i++)
         {
             Vector3 spawnLocation = camera.transform.position + PixelToGame((camera.rect.width / 2 + 100) * -1, Random.Range(-320.0f, 0.0f), -1);
             Managers.GetInstance().GetNPCManager().SpawnHipster(spawnLocation);
@@ -201,7 +203,10 @@ public class StageManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (!complete && waves > 0)
+        Debug.Log(complete);
+        Debug.Log(spawnTimer);
+        Debug.Log(currentScene);
+        if (!complete && currentScene < bossScene && waves > 0)
         {
             spawnTimer -= Time.deltaTime;
 
@@ -209,15 +214,31 @@ public class StageManager : MonoBehaviour {
             {
                 spawnTimer = spawnTime;
 
-                spawnNPCs();
+                spawnNPCs(5);
                 waves -= 1;
+            } 
+        } else if (currentScene == bossScene && !bossSpawned)
+        {
+            bossSpawned = true;
+            Vector3 spawnLocation = camera.transform.position + PixelToGame((camera.rect.width / 2 + 100), Random.Range(-320.0f, 0.0f), -1);
+            Managers.GetInstance().GetNPCManager().SpawnBoss(spawnLocation);
+            waves = 0;
+        }
+        else if (!complete && currentScene == bossScene)
+        {
+            spawnTimer -= Time.deltaTime;
 
-                if (waves <= 0)
-                {
-                    complete = true;
-                    spawnTimer = 0.0f;
-                }
+            if (spawnTimer <= 0.0f)
+            {
+                spawnTimer = spawnTime;
+                spawnNPCs(1);
             }
+        }
+
+        if (Managers.GetInstance().GetNPCManager().allEnemiesDead() && waves <= 0)
+        {
+            complete = true;
+            spawnTimer = 0.0f;
         }
 
         if (grounds.Count > 0)

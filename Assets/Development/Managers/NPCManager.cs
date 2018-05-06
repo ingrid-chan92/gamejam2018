@@ -56,11 +56,11 @@ public class NPCManager : MonoBehaviour {
 
     public void SpawnBoss(Vector3 position)
     {
+        NPC = Managers.GetInstance().GetGameProperties().BossPrefab;
         GameObject npc = GameObject.Instantiate(NPC);
         npc.transform.SetPositionAndRotation(position, npc.transform.rotation);
         m_hipster.Add(npc.GetComponent<HipsterController>());
         NPCCount++;
-        NPC = Managers.GetInstance().GetGameProperties().BossPrefab;
     }
 
     public bool allEnemiesDead()
