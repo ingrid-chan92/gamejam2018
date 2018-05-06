@@ -126,8 +126,19 @@ public class StageManager : MonoBehaviour {
         buildings.Add(building);
         buildingWidths.Add(buildingTex.width);
 
-        fence.transform.SetPositionAndRotation(PixelToGame(GameToPixel(building.transform.position.x, 0, 0).x + (buildingTex.width / 2 * building.transform.localScale.x) + (fenceTex.width / 2 * fence.transform.localScale.x), 85 + (fenceTex.height / 2 * fence.transform.localScale.y), fence.transform.position.z), fence.transform.rotation);
+
+        Vector3 fencePos = PixelToGame(GameToPixel(building.transform.position.x, 0, 0).x + (buildingTex.width / 2 * building.transform.localScale.x) + (fenceTex.width / 2 * fence.transform.localScale.x), 85 + (fenceTex.height / 2 * fence.transform.localScale.y), fence.transform.position.z);
+
+        fence.transform.SetPositionAndRotation(fencePos, fence.transform.rotation);
         buildingWidths.Add(fenceTex.width);
+
+        int randGoat = Random.Range(0, 10);
+        if (randGoat <= 1)
+        {
+            GameObject goat = GameObject.Instantiate(Managers.GetInstance().GetGameProperties().GoatPrefab);
+            goat.transform.SetPositionAndRotation(PixelToGame(GameToPixel(fencePos.x, 0, 0).x, 163, 20), fence.transform.rotation);
+        }
+
         buildings.Add(fence);
     }
 

@@ -12,7 +12,9 @@ public class GameProperties : MonoBehaviour {
     public GameObject BackBuildingsPrefab;
     public GameObject SmallHealthPrefab;
     public GameObject BigHealthPrefab;
+    public GameObject RaccoonPrefab;
     public GameObject RaccoonItemPrefab;
+    public GameObject GoatPrefab;
 
     // Buildings
     public GameObject PoorFence;

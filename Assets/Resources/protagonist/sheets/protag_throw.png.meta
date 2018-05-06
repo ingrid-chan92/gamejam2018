@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b0b8b333caa39074f900ff1cf2403740
-timeCreated: 1525539830
+timeCreated: 1525552152
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -141,10 +141,10 @@ TextureImporter:
       name: protag_throw_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 3728
-        width: 128
-        height: 247
+        x: 0
+        y: 3724
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: protag_throw_1
       rect:
         serializedVersion: 2
-        x: 34
-        y: 3461
-        width: 138
-        height: 249
+        x: 0
+        y: 3458
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,10 +169,10 @@ TextureImporter:
       name: protag_throw_2
       rect:
         serializedVersion: 2
-        x: 36
-        y: 3194
-        width: 146
-        height: 248
+        x: 0
+        y: 3192
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,10 +183,10 @@ TextureImporter:
       name: protag_throw_3
       rect:
         serializedVersion: 2
-        x: 38
-        y: 2927
-        width: 158
-        height: 248
+        x: 0
+        y: 2926
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +197,10 @@ TextureImporter:
       name: protag_throw_4
       rect:
         serializedVersion: 2
-        x: 36
-        y: 2657
-        width: 162
-        height: 253
+        x: 0
+        y: 2660
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,10 +211,10 @@ TextureImporter:
       name: protag_throw_5
       rect:
         serializedVersion: 2
-        x: 32
-        y: 2392
-        width: 171
-        height: 251
+        x: 0
+        y: 2394
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +225,10 @@ TextureImporter:
       name: protag_throw_6
       rect:
         serializedVersion: 2
-        x: 30
-        y: 2127
-        width: 172
-        height: 250
+        x: 0
+        y: 2128
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,10 +239,10 @@ TextureImporter:
       name: protag_throw_7
       rect:
         serializedVersion: 2
-        x: 24
-        y: 1864
-        width: 166
-        height: 256
+        x: 0
+        y: 1862
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,10 +253,10 @@ TextureImporter:
       name: protag_throw_8
       rect:
         serializedVersion: 2
-        x: 19
-        y: 1598
-        width: 130
-        height: 260
+        x: 0
+        y: 1596
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,10 +267,10 @@ TextureImporter:
       name: protag_throw_9
       rect:
         serializedVersion: 2
-        x: 13
-        y: 1333
-        width: 136
-        height: 260
+        x: 0
+        y: 1330
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +281,10 @@ TextureImporter:
       name: protag_throw_10
       rect:
         serializedVersion: 2
-        x: 7
-        y: 1068
-        width: 142
-        height: 260
+        x: 0
+        y: 1064
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -295,10 +295,10 @@ TextureImporter:
       name: protag_throw_11
       rect:
         serializedVersion: 2
-        x: 19
-        y: 804
-        width: 129
-        height: 257
+        x: 0
+        y: 798
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -309,10 +309,10 @@ TextureImporter:
       name: protag_throw_12
       rect:
         serializedVersion: 2
-        x: 24
-        y: 537
-        width: 125
-        height: 257
+        x: 0
+        y: 532
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,10 +323,10 @@ TextureImporter:
       name: protag_throw_13
       rect:
         serializedVersion: 2
-        x: 31
-        y: 270
-        width: 117
-        height: 255
+        x: 0
+        y: 266
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -337,10 +337,10 @@ TextureImporter:
       name: protag_throw_14
       rect:
         serializedVersion: 2
-        x: 38
-        y: 5
-        width: 113
-        height: 249
+        x: 0
+        y: 0
+        width: 203
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
