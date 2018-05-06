@@ -293,7 +293,7 @@ public class StageManager : MonoBehaviour {
 
             if (spawnTimer <= 0.0f)
             {
-                spawnTimer = spawnTime * 4;
+                spawnTimer = spawnTime * 8;
                 spawnNPCs(1);
             }
         }
