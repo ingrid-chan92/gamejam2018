@@ -25,7 +25,7 @@ public class StageManager : MonoBehaviour {
     private int currentScene = 0;
     private bool bossSpawned = false;
 
-    private int bossScene = 3;
+    private int bossScene = 5;
 
     private GameObject groundPrefab;
     private GameObject buildingPrefab;
@@ -85,7 +85,7 @@ public class StageManager : MonoBehaviour {
     {
         int randPoor = Random.Range(0, 2);
         int randRich = Random.Range(0, 5);
-        int randSetting = Random.Range(1, bossScene+1);
+        int randSetting = Random.Range(1, bossScene);
 
         if (randSetting <= currentScene)
         {
@@ -164,8 +164,6 @@ public class StageManager : MonoBehaviour {
     {
         complete = false;
         this.waves = waves;
-
-        addNewGround();
     }
 
     // Use this for initialization
@@ -189,7 +187,7 @@ public class StageManager : MonoBehaviour {
             addNewGround();
         }
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 5; i++)
         {
             addNewBuilding();
         }
@@ -248,9 +246,8 @@ public class StageManager : MonoBehaviour {
             {
                 GameObject.Destroy(obj);
                 grounds.Remove(obj);
-                
-                currentScene += 1;
-                newScene(currentScene);
+                addNewGround();
+
             }
         }
         if (buildings.Count > 0)
@@ -273,6 +270,9 @@ public class StageManager : MonoBehaviour {
                 backBuildings.Remove(obj);
 
                 addNewBackBuilding();
+
+                currentScene += 1;
+                newScene(currentScene);
             }
         }
         if (potholes.Count > 0)
