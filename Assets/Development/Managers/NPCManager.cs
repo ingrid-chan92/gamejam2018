@@ -29,10 +29,13 @@ public class NPCManager : MonoBehaviour {
         }
         if (destroyNPC)
         {
-            if (Random.Range(0.0f, 10.0f) < 1f)
+            if (Random.Range(0, 10) < 1)
             {
                 deathSpot.z = -10f;
                 Managers.GetInstance().GetPowerupManager().SpawnPowerup(deathSpot);
+            }
+            if (destroyNPC.strength > 10) {
+                Application.LoadLevel("WinScene");
             }
             m_hipster.Remove(destroyNPC);
         }
@@ -61,6 +64,7 @@ public class NPCManager : MonoBehaviour {
         npc.transform.SetPositionAndRotation(position, npc.transform.rotation);
         m_hipster.Add(npc.GetComponent<HipsterController>());
         NPCCount++;
+        Managers.GetInstance().GetStageManager().bossMusic();
     }
 
     public bool allEnemiesDead()

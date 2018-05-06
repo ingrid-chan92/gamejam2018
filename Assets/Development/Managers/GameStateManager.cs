@@ -55,7 +55,8 @@ public class GameStateManager : MonoBehaviour {
         ChangeGameState(Enums.GameStateNames.GS_01_MENU); //starts in the menu state
 
 		m_initialised = true;
-	}
+
+    }
 
 	//Change the game state (occurs on next frame)
 	public void ChangeGameState(Enums.GameStateNames nextState)

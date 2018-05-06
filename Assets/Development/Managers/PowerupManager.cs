@@ -35,8 +35,8 @@ public class PowerupManager : MonoBehaviour {
 
     public void SpawnPowerup(Vector3 position)
     {
-        float randVal = Random.Range(0.0f, 10.0f);
-        if (randVal < 5)
+        float randVal = Random.Range(0, 10);
+        if (randVal < 6)
         {
             PU = Managers.GetInstance().GetGameProperties().SmallHealthPrefab;
         } else if (randVal < 8)

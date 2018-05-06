@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     private int currentHealth;
     private Camera camera;
     private PlayerStates state = PlayerStates.idle;
+    private float deadTime = 3f;
     private Animator animator;
     private Collider2D hurtbox;
     private Vector3 initScale;
@@ -40,10 +41,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     void die() {
-        Debug.Log("The player has been killed because they are bad at video games");
         animator.SetBool("dying", true);
         state = PlayerStates.dying;
-        //Debug.Log("I am slain");
     }
 
     public void damage(int amount) {
@@ -78,11 +77,10 @@ public class PlayerController : MonoBehaviour {
         
 
         this.currentHealth -= amount;
+
         if (this.currentHealth > this.startHealth) {
             this.currentHealth = this.startHealth;
         }
-        //Debug.Log("Damaging player by " + amount + " units");
-        Debug.Log("Current Health = " + currentHealth);
         if (this.currentHealth < 0) {
             this.die();
         }
@@ -98,20 +96,33 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 walkVector = Vector3.zero;
 
+        if (state == PlayerStates.dead || state == PlayerStates.dying)
+        {
+            deadTime -= Time.deltaTime;
+            if (deadTime <= 0) {
+                Application.LoadLevel("GameOver");
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.J)) {
             this.die();
         }
+        Camera cam = Camera.main;
+        float camX = cam.transform.position.x;
+        float maxL = camX - 3f;
+        float maxR = camX + 3f;
 
-        if (Input.GetKey(KeyCode.A)) {
+
+        if (Input.GetKey(KeyCode.A) && transform.position.x >= maxL) {
             walkVector += Vector3.left;
         }
-        if (Input.GetKey(KeyCode.D)) {
+        if (Input.GetKey(KeyCode.D) && transform.position.x <= maxR) {
             walkVector += Vector3.right;
         }
-        if (Input.GetKey(KeyCode.W)) {
+        if (Input.GetKey(KeyCode.W) && transform.position.y <= 0.75) {
             walkVector += (Vector3.up * ySpeedMult);
         }
-        if (Input.GetKey(KeyCode.S)) {
+        if (Input.GetKey(KeyCode.S) && transform.position.y >= -2) {
             walkVector += (Vector3.down * ySpeedMult);
         }
 
@@ -208,4 +219,5 @@ public class PlayerController : MonoBehaviour {
             camera.transform.Translate(step * Vector3.right);
         }
     }
+
 }
