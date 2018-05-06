@@ -15,11 +15,14 @@ public class StageManager : MonoBehaviour {
     private Sprite pothole1Sprite;
 
     private Camera camera;
+    private Vector3 cameraPreviousPosition;
 
     public float spawnTime = 5.0f;
     private float spawnTimer = 0.0f;
 
     public float potholeChance = 0.2f;
+
+    private int buildingsPast = 0;
 
     private bool complete = true;
     private int waves = 0;
@@ -78,12 +81,12 @@ public class StageManager : MonoBehaviour {
 
         if (backBuildings.Count == 0)
         {
-            backBuilding.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, 180, 1000), backBuilding.transform.rotation);
+            backBuilding.transform.SetPositionAndRotation(PixelToGame(camera.transform.position.x - camera.rect.width, 190, 1000), backBuilding.transform.rotation);
         }
         else
         {
             GameObject lastTile = backBuildings[backBuildings.Count - 1];
-            backBuilding.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (backBuildingTexture.width * backBuilding.transform.localScale.x), 180, 1000), backBuilding.transform.rotation);
+            backBuilding.transform.SetPositionAndRotation(PixelToGame(GameToPixel(lastTile.transform.position.x, 0, 0).x + (backBuildingTexture.width * backBuilding.transform.localScale.x), 190, 1000), backBuilding.transform.rotation);
         }
 
         backBuildings.Add(backBuilding);
@@ -196,7 +199,7 @@ public class StageManager : MonoBehaviour {
         musicPrefab = Managers.GetInstance().GetGameProperties().LevelMusic;
         music = GameObject.Instantiate(musicPrefab);
 
-
+        cameraPreviousPosition = camera.transform.position;
 
         groundPrefab = Managers.GetInstance().GetGameProperties().GroundPrefab;
 
@@ -265,7 +268,7 @@ public class StageManager : MonoBehaviour {
 
             if (spawnTimer <= 0.0f)
             {
-                spawnTimer = spawnTime;
+                spawnTimer = spawnTime / 2;
                 spawnNPCs(1);
             }
         }
@@ -276,6 +279,13 @@ public class StageManager : MonoBehaviour {
             spawnTimer = 0.0f;
         }
 
+        Vector3 cameraDiff = camera.transform.position - cameraPreviousPosition;
+        foreach (GameObject backBuilding in backBuildings)
+        {
+            backBuilding.transform.Translate(cameraDiff / 2);
+        }
+        cameraPreviousPosition = camera.transform.position;
+
         if (grounds.Count > 0)
         {
             GameObject obj = grounds[0];
@@ -285,6 +295,7 @@ public class StageManager : MonoBehaviour {
                 grounds.Remove(obj);
                 addNewGround();
 
+                buildingsPast += 1;
             }
         }
         if (buildings.Count > 0)
@@ -310,9 +321,6 @@ public class StageManager : MonoBehaviour {
                 backBuildings.Remove(obj);
 
                 addNewBackBuilding();
-
-                currentScene += 1;
-                newScene(currentScene);
             }
         }
         if (potholes.Count > 0)
@@ -323,6 +331,13 @@ public class StageManager : MonoBehaviour {
                 GameObject.Destroy(obj);
                 potholes.Remove(obj);
             }
+        }
+
+        if (buildingsPast >= 1)
+        {
+            currentScene += 1;
+            newScene(currentScene);
+            buildingsPast = 0;
         }
     }
 

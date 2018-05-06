@@ -22,6 +22,7 @@ public class GameProperties : MonoBehaviour {
     public GameObject LevelMusic;
     public GameObject BossMusic;
     public GameObject HealthBar;
+    public GameObject RaccoonBar;
 
     // Buildings
     public GameObject PoorFence;

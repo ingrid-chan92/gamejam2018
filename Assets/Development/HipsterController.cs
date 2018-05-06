@@ -35,7 +35,7 @@ public class HipsterController : MonoBehaviour {
         fullDead = false;
         attackDist = .8f;
         deadTime = 3f;
-        float randNum = Random.Range(0.0f, 100.0f);
+        float randNum = Random.Range(0, 100);
         hasBox = true;
         chatBoxTimer = 5.0f;
         if (randNum > chatBoxChance)
@@ -91,11 +91,7 @@ public class HipsterController : MonoBehaviour {
         {
             attack(playPos);
         }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            this.die();
-        }
+        
     }
 
     private string getState(Vector3 playerPos)

@@ -29,7 +29,7 @@ public class NPCManager : MonoBehaviour {
         }
         if (destroyNPC)
         {
-            if (Random.Range(0, 10) < 1)
+            if (Random.Range(0, 10) < 2)
             {
                 deathSpot.z = -10f;
                 Managers.GetInstance().GetPowerupManager().SpawnPowerup(deathSpot);
@@ -43,7 +43,7 @@ public class NPCManager : MonoBehaviour {
 
     public void SpawnHipster(Vector3 position)
     {
-        if (Random.Range(0.0f,3.0f) < 1f)
+        if (Random.Range(0,2) < 1)
         {
             NPC = Managers.GetInstance().GetGameProperties().HipsterPrefab;
         }
