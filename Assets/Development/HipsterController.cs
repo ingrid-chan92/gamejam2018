@@ -91,11 +91,7 @@ public class HipsterController : MonoBehaviour {
         {
             attack(playPos);
         }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            this.die();
-        }
+        
     }
 
     private string getState(Vector3 playerPos)

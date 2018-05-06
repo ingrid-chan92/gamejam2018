@@ -29,7 +29,7 @@ public class NPCManager : MonoBehaviour {
         }
         if (destroyNPC)
         {
-            if (Random.Range(0, 10) < 1)
+            if (Random.Range(0, 10) < 2)
             {
                 deathSpot.z = -10f;
                 Managers.GetInstance().GetPowerupManager().SpawnPowerup(deathSpot);

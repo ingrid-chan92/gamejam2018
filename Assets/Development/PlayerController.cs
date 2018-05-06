@@ -135,9 +135,6 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.J)) {
-            this.die();
-        }
         Camera cam = Camera.main;
         float camX = cam.transform.position.x;
         float maxL = camX - 3f;
