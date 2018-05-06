@@ -44,13 +44,19 @@ public class NPCManager : MonoBehaviour {
         {
             NPC = Managers.GetInstance().GetGameProperties().HipsterPrefab;
         }
-        else if(Random.Range(0.0f, 3.0f) < 2f)
+        else
         {
             NPC = Managers.GetInstance().GetGameProperties().Hipster2Prefab;
-        } else
-        {
-            NPC = Managers.GetInstance().GetGameProperties().BossPrefab;
-        }
+        } 
+        GameObject npc = GameObject.Instantiate(NPC);
+        npc.transform.SetPositionAndRotation(position, npc.transform.rotation);
+        m_hipster.Add(npc.GetComponent<HipsterController>());
+        NPCCount++;
+    }
+
+    public void SpawnBoss(Vector3 position)
+    {
+        NPC = Managers.GetInstance().GetGameProperties().BossPrefab;
         GameObject npc = GameObject.Instantiate(NPC);
         npc.transform.SetPositionAndRotation(position, npc.transform.rotation);
         m_hipster.Add(npc.GetComponent<HipsterController>());

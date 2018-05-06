@@ -78,6 +78,9 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites: []
   - buildTarget: Standalone
     maxTextureSize: 2048
     textureFormat: -1

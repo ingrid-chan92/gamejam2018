@@ -47,7 +47,7 @@ public class Managers : MonoBehaviour {
     //Public Variables
     public void Awake()	{
 		m_instance = this;
-	}
+    }
 
 	public void Start() {
 		//Create managers here

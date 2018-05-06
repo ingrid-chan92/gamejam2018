@@ -18,13 +18,18 @@ public class PowerupController : MonoBehaviour {
     void Update () {
         if (used)
         {
-            Debug.Log("used");
             return;
         }
 
         if (heal > 0 && Vector3.Distance(Player.transform.position, transform.position) < .5)
         {
             Player.GetComponent<PlayerController>().damage(heal * -1);
+            used = true;
+        }
+
+        if (heal == 0 && Vector3.Distance(Player.transform.position, transform.position) < .5)
+        {
+            Debug.Log("CUTE RACCOON!!!!!!!!!!");
             used = true;
         }
 

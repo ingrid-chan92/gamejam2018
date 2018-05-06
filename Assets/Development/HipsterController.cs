@@ -17,6 +17,9 @@ public class HipsterController : MonoBehaviour {
     private float deadTime;
     private float fullAttackTime;
     private float attackDist;
+    public float chatBoxChance;
+    private bool hasBox;
+    private float chatBoxTimer;
 
 
     // Use this for initialization
@@ -32,6 +35,13 @@ public class HipsterController : MonoBehaviour {
         fullDead = false;
         attackDist = 1f;
         deadTime = 3f;
+        float randNum = Random.Range(0.0f, 100.0f);
+        hasBox = true;
+        chatBoxTimer = 5.0f;
+        if (randNum > chatBoxChance)
+        {
+            disableBox();
+        }
     }
 
     // Update is called once per frame
@@ -48,6 +58,16 @@ public class HipsterController : MonoBehaviour {
                 fullDead = true;
             }
             return;
+        }
+
+        if (hasBox)
+        {
+            Debug.Log(chatBoxTimer);
+            chatBoxTimer -= Time.deltaTime;
+            if (chatBoxTimer <= 0)
+            {
+                disableBox();
+            }
         }
 
         if (state == "attack" && attacking == 1 && atkTimer > 0)
@@ -120,19 +140,27 @@ public class HipsterController : MonoBehaviour {
 
     private string facePlayer(Vector3 playerPos)
     {
+        GameObject textBox = transform.Find("Chat_Box").gameObject;
+
         if (playerPos.x < transform.position.x)
         {
+            
             if (direction != "left")
-            { 
-                transform.Rotate(0, 180, 0);
+            {
+                transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
+                textBox.transform.localScale = new Vector3(textBox.transform.localScale.x * -1f, textBox.transform.localScale.y, textBox.transform.localScale.z);
+                textBox.transform.localPosition = new Vector3(textBox.transform.localPosition.x - 1f, textBox.transform.localPosition.y, textBox.transform.localPosition.z);
             }
             return "left";
         } else
         {
             if (direction != "right")
             {
-                transform.Rotate(0, -180, 0);
+                transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
+                textBox.transform.localScale = new Vector3(textBox.transform.localScale.x * -1f, textBox.transform.localScale.y, textBox.transform.localScale.z);
+                textBox.transform.localPosition = new Vector3(textBox.transform.localPosition.x + 1f, textBox.transform.localPosition.y, textBox.transform.localPosition.z);
             }
+
             return "right";
         }
     }
@@ -155,5 +183,16 @@ public class HipsterController : MonoBehaviour {
     public bool isDead()
     {
         return fullDead;
+    }
+
+    private void disableBox()
+    {
+        if (!hasBox)
+        {
+            return;
+        }
+        GameObject textBox = transform.Find("Chat_Box").gameObject;
+        textBox.SetActive(false);
+        hasBox = false;
     }
 }

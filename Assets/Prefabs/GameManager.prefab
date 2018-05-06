@@ -43,16 +43,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dbc1d7a0597443ba884b3a74af1158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraPrefab: {fileID: 1022594033144822, guid: 242012838150536429228b1bef133ee4,
+    type: 2}
   PlayerPrefab: {fileID: 1049031074774824, guid: 3a84e1e8a053a6c4891ddd2e8d828c93,
     type: 2}
-  CameraPrefab: {fileID: 1797545108939864, guid: 242012838150536429228b1bef133ee4,
-    type: 2}
-  LevelPrefab: {fileID: 115842, guid: c5addea24f8044ee68fff7e3d88e7eee, type: 2}
   HipsterPrefab: {fileID: 1765459899123038, guid: 58ae96c91cdd90d4ab9da30cda72a8eb,
     type: 2}
   Hipster2Prefab: {fileID: 1295765754704324, guid: 71304cb5ad8e20242873f6c8e9909d0f,
     type: 2}
   BossPrefab: {fileID: 1777326153467928, guid: 68bf7c95d39dd55499e02978a3cc6baa, type: 2}
+  GroundPrefab: {fileID: 1246691729393428, guid: a318e4d8d071dd7418662f988703e4cb,
+    type: 2}
+  BackBuildingsPrefab: {fileID: 1506514905708868, guid: ed89a0b3a2b3ffd4ba955283237eb5c0,
+    type: 2}
+  SmallHealthPrefab: {fileID: 1700800095398474, guid: d66da71114ca3ae48a3495c76e7e41d7,
+    type: 2}
+  BigHealthPrefab: {fileID: 1587024346898566, guid: ebb553a8d1abeee469abc5b75aecb6c2,
+    type: 2}
+  RaccoonItemPrefab: {fileID: 1718577629306516, guid: 872bad60d9353fd46b287cb10b2f1265,
+    type: 2}
+  GoatPrefab: {fileID: 1584025433298570, guid: f2d45c2ff810fbf49be3b9bdf9e1ca01, type: 2}
+  PoorFence: {fileID: 1237875904335572, guid: 83a29ea5609db9b408e4a1281c5e42af, type: 2}
+  PoorBuildings:
+  - {fileID: 1326161160107244, guid: d1615ad81e8352b4698254b82335a8b4, type: 2}
+  - {fileID: 1946169385126338, guid: 50431f39dec72d44dbe0227450f0beae, type: 2}
+  GentrifiedBuildings:
+  - {fileID: 1621780108860292, guid: 357ae94337e56874793bc914b2e6ce10, type: 2}
+  - {fileID: 1507563304559314, guid: cf5586bd92f211640a13fb6dd19d3689, type: 2}
+  - {fileID: 1182920273738686, guid: 6529fe8466d7e8948981c362464da976, type: 2}
+  - {fileID: 1852568171945222, guid: fbef7c135191d5e4990ef17bdd7d5b95, type: 2}
+  - {fileID: 1056311524745312, guid: 2ba30f7825480fd4e889e3bcddb082f5, type: 2}
+  RichFence:
+  - {fileID: 1054823330683644, guid: 78ff641744089e14287fe4188ae3a3c1, type: 2}
+  - {fileID: 1308301319046966, guid: 4058dd66fe4b0e1488cf932443b41dd0, type: 2}
 --- !u!114 &11456954
 MonoBehaviour:
   m_ObjectHideFlags: 1
