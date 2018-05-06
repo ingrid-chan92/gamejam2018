@@ -193,7 +193,6 @@ public class PlayerController : MonoBehaviour {
         filter.layerMask = enemiesMask;
         filter.useLayerMask = true;
         int resultCount = hurtbox.OverlapCollider(filter, results);
-        Debug.Log("Attack contacting " + resultCount + " other things");
 
         for (int i = 0; i < resultCount; i++) {
             HipsterController enemy;

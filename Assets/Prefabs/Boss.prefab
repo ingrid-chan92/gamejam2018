@@ -273,7 +273,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1553889469680160}
-  m_Text: "Soon the whole foods \nwill be built, then nothing\n will stop me!"
+  m_Text: "Soon the \"Whole Foods\" \nwill be built, then nothing\n will stop me!"
   m_OffsetZ: 0
   m_CharacterSize: 0.7
   m_LineSpacing: 1
