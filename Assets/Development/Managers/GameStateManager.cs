@@ -18,8 +18,8 @@ public class GameStateManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		// State machine shenanigans 
-		if (!m_initialised)
+        // State machine shenanigans 
+        if (!m_initialised)
 			return;
 
 		if (m_currentGameState != null)

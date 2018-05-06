@@ -115,6 +115,11 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.LoadLevel("StartMenu");
+        }
+
         Text raccoonText = raccoonBar.GetComponentInChildren<Text>();
         string raccoonString = numRaccoons.ToString();
         if (numRaccoons < 0)
