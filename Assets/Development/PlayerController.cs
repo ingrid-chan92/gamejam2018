@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
     public int startHealth = 100;
     public int punchDamage = 10;
     public float iFrameTime = 1.0f;
+    public float attackIntervalSeconds = 0.75f;
+    private float timeSinceAttack;
     private int currentHealth;
     private Camera camera;
     private PlayerStates state = PlayerStates.idle;
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour {
         healthBar = GameObject.Instantiate(HP);
         Text hpText = healthBar.GetComponentInChildren<Text>();
         hpText.text = currentHealth.ToString();
+        this.timeSinceAttack = attackIntervalSeconds;
     }
 
     void die() {
@@ -108,6 +111,11 @@ public class PlayerController : MonoBehaviour {
             this.remainingIFrameTime -= Time.deltaTime;
         }
 
+        if (timeSinceAttack < attackIntervalSeconds)
+        {
+            timeSinceAttack += Time.deltaTime;
+        }
+
         Vector3 walkVector = Vector3.zero;
 
         if (state == PlayerStates.dead || state == PlayerStates.dying)
@@ -158,6 +166,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     void attack() {
+        if (timeSinceAttack < attackIntervalSeconds)
+        {
+            return;
+        }
+        timeSinceAttack = 0f;
+
         animator.SetTrigger("punch");
         Collider2D[] results = new Collider2D[20];
 
