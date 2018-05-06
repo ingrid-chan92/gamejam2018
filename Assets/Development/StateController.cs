@@ -13,12 +13,12 @@ public class StateController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (Input.GetKey(KeyCode.Escape)) {
+        if (Input.GetKey(KeyCode.Escape) && state == "Menu")
+        {
             Application.Quit();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
         {
             if (state == "Menu")
             {
