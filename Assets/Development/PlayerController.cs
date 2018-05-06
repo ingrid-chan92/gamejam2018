@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
         if (currentHealth < 0) {
             healthString = "0";
         }
-        hpText.text = currentHealth.ToString();
+        hpText.text = healthString;
 
         if (this.currentHealth > this.startHealth) {
             this.currentHealth = this.startHealth;
