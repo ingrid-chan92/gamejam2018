@@ -104,7 +104,6 @@ public class RaccoonController : MonoBehaviour {
             timeSinceBite += Time.deltaTime;
             return;
         }
-
         timeSinceBite -= biteIntervalSeconds;
 
         Collider2D[] results = new Collider2D[20];

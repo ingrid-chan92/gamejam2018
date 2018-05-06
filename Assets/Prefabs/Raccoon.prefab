@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   biteDamage: 1
-  biteIntervalSeconds: 0.2
+  biteIntervalSeconds: 0.4
 --- !u!212 &212203570009028556
 SpriteRenderer:
   m_ObjectHideFlags: 1

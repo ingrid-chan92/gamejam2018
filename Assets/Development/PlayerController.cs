@@ -208,7 +208,7 @@ public class PlayerController : MonoBehaviour {
             return;
         }
         this.numRaccoons--;
-
+        
         animator.SetTrigger("throwing");
         GameObject raccoonPrefab = Managers.GetInstance().GetGameProperties().RaccoonPrefab;
 
