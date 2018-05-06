@@ -23,6 +23,7 @@ public class GameProperties : MonoBehaviour {
     public GameObject BossMusic;
     public GameObject HealthBar;
     public GameObject RaccoonBar;
+    public GameObject Arrow;
 
     // Buildings
     public GameObject PoorFence;

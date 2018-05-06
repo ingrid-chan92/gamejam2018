@@ -33,7 +33,7 @@ public class HipsterController : MonoBehaviour {
         atkTimer = fullAttackTime;
         dead = false;
         fullDead = false;
-        attackDist = .8f;
+        attackDist = 1;
         deadTime = 3f;
         float randNum = Random.Range(0, 100);
         hasBox = true;
