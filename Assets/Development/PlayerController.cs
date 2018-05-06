@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public float ySpeedMult = 0.5f; // Multiplier for speed when moving up or down
     public int startHealth = 100;
     public int punchDamage = 10;
+    public float iFrameTime = 1.0f;
     private int currentHealth;
     private Camera camera;
     private PlayerStates state = PlayerStates.idle;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour {
     private Collider2D hurtbox;
     private Vector3 initScale;
     private LayerMask enemiesMask;
+    private float remainingIFrameTime = 0f;
 
     private enum PlayerStates {
         stopped,
@@ -47,6 +49,13 @@ public class PlayerController : MonoBehaviour {
         if (this.currentHealth < 0) {
             return;
         }
+        if (this.remainingIFrameTime > 0)
+        {
+            this.remainingIFrameTime -= Time.deltaTime;
+            return;
+        }
+        this.remainingIFrameTime = iFrameTime;
+
         this.currentHealth -= amount;
         if (this.currentHealth > this.startHealth) {
             this.currentHealth = this.startHealth;
@@ -124,11 +133,13 @@ public class PlayerController : MonoBehaviour {
         Vector3 initialVelocity;
 
         if (transform.localScale.x < 0) {
-            initialVelocity = new Vector3(2, 2);
+            initialVelocity = new Vector3(-2, 2);
             Vector3 racScale = raccoon.transform.localScale;
             raccoon.transform.localScale = new Vector3(-1 * racScale.x, racScale.y, racScale.z);
+
         } else {
-            initialVelocity = new Vector3(-2, 2);
+            initialVelocity = new Vector3(2, 2);
+            
         }
 
         RaccoonController cntrl = raccoon.GetComponent<RaccoonController>();

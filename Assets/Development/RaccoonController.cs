@@ -10,11 +10,12 @@ public class RaccoonController : MonoBehaviour {
     private enum racState
     {
         Launched,
-        Latched
+        Latched,
+        EnemyDead
     }
     private racState curState;
     private HipsterController attachedHipster;
-    private Vector3 headOffset = new Vector3(0, 0.5f, 5);
+    private Vector3 headOffset = new Vector3(0, 0.25f, 5);
     private Animator animator;
     public int biteDamage = 1;
     public float biteIntervalSeconds = 1.0f;
@@ -36,13 +37,16 @@ public class RaccoonController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        // Accelerate due to gravity
-        Vector3 deltaV = Vector3.down * Time.deltaTime * Constants.gravity;
-        velocity += deltaV;
+        if (curState != racState.Latched)
+        {
+            // Accelerate due to gravity
+            Vector3 deltaV = Vector3.down * Time.deltaTime * Constants.gravity;
+            velocity += deltaV;
 
-        // Move due to velocity
-        transform.position += (velocity * Time.deltaTime);
-
+            // Move due to velocity
+            transform.position += (velocity * Time.deltaTime);
+        }
+        
         if (transform.position.y < -10)
         {
             Destroy(gameObject);
@@ -63,6 +67,8 @@ public class RaccoonController : MonoBehaviour {
     {
         if (attachedHipster == null)
         {
+            curState = racState.EnemyDead;
+            velocity = Vector3.zero;
             return;
         }
 
