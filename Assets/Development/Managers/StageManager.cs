@@ -22,7 +22,7 @@ public class StageManager : MonoBehaviour {
 
     public float potholeChance = 0.2f;
 
-    private int buildingsPast = 1;
+    private int buildingsPast = 0;
 
     private bool complete = true;
     private int waves = 0;
@@ -295,6 +295,7 @@ public class StageManager : MonoBehaviour {
                 grounds.Remove(obj);
                 addNewGround();
 
+                buildingsPast += 1;
             }
         }
         if (buildings.Count > 0)
@@ -309,7 +310,6 @@ public class StageManager : MonoBehaviour {
                 buildings.Remove(obj2);
 
                 addNewBuilding();
-                buildingsPast += 1;
             }
         }
         if (backBuildings.Count > 0)
@@ -333,7 +333,7 @@ public class StageManager : MonoBehaviour {
             }
         }
 
-        if (buildingsPast >= 2)
+        if (buildingsPast >= 1)
         {
             currentScene += 1;
             newScene(currentScene);
