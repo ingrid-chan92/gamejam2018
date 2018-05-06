@@ -18,6 +18,8 @@ public class GameProperties : MonoBehaviour {
     public GameObject MenuPrefab;
     public GameObject GameOverPrefab;
     public GameObject WinPrefab;
+    public GameObject LevelMusic;
+    public GameObject BossMusic;
 
     // Buildings
     public GameObject PoorFence;

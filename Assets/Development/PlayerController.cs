@@ -175,8 +175,4 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void BossMusic ()
-    {
-
-    }
 }

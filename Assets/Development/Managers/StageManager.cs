@@ -26,12 +26,14 @@ public class StageManager : MonoBehaviour {
     private int currentScene = 0;
     private bool bossSpawned = false;
 
-    private int bossScene = 5;
+    private int bossScene = 2;
 
     private GameObject groundPrefab;
     private GameObject buildingPrefab;
     private GameObject fencePrefab;
     private GameObject backBuildingPrefab;
+    private GameObject musicPrefab;
+    private GameObject music;
 
     private List<GameObject> grounds = new List<GameObject>();
     private List<GameObject> potholes = new List<GameObject>();
@@ -191,6 +193,11 @@ public class StageManager : MonoBehaviour {
     void Start () {
         camera = Camera.main;
 
+        musicPrefab = Managers.GetInstance().GetGameProperties().LevelMusic;
+        music = GameObject.Instantiate(musicPrefab);
+
+
+
         groundPrefab = Managers.GetInstance().GetGameProperties().GroundPrefab;
 
         backBuildingPrefab = Managers.GetInstance().GetGameProperties().BackBuildingsPrefab;
@@ -317,5 +324,13 @@ public class StageManager : MonoBehaviour {
                 potholes.Remove(obj);
             }
         }
+    }
+
+    public void bossMusic ()
+    {
+        Destroy(music);
+        musicPrefab = Managers.GetInstance().GetGameProperties().BossMusic;
+        music = GameObject.Instantiate(musicPrefab);
+
     }
 }

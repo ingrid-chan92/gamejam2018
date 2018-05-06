@@ -64,6 +64,7 @@ public class NPCManager : MonoBehaviour {
         npc.transform.SetPositionAndRotation(position, npc.transform.rotation);
         m_hipster.Add(npc.GetComponent<HipsterController>());
         NPCCount++;
+        Managers.GetInstance().GetStageManager().bossMusic();
     }
 
     public bool allEnemiesDead()
